@@ -7,7 +7,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for countmessagebycounty#countmessagebycounty_2.10;1.0 [compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies countmessagebycounty#countmessagebycounty_2.10;1.0->org.scala-lang#scala-library;2.10.4 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@76fa3be[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@343c41cb[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.10.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.10.4] org.scala-lang#scala-library;2.10.4[0m
@@ -1794,7 +1794,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.2.0/hadoop-mapreduce-client-app-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.2.0/hadoop-mapreduce-client-app-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.2.0/hadoop-mapreduce-client-app-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-app;2.2.0!hadoop-mapreduce-client-app.pom(pom.original) (266ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-app;2.2.0!hadoop-mapreduce-client-app.pom(pom.original) (215ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-mapreduce-client;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-mapreduce-client;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-mapreduce-client;2.2.0[0m
@@ -1843,7 +1843,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.2.0/hadoop-mapreduce-client-common-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.2.0/hadoop-mapreduce-client-common-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.2.0/hadoop-mapreduce-client-common-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-common;2.2.0!hadoop-mapreduce-client-common.pom(pom.original) (265ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-common;2.2.0!hadoop-mapreduce-client-common.pom(pom.original) (214ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-mapreduce-client;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-mapreduce-client;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-mapreduce-client;2.2.0[0m
@@ -1895,7 +1895,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.2.0/hadoop-yarn-common-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.2.0/hadoop-yarn-common-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.2.0/hadoop-yarn-common-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-common;2.2.0!hadoop-yarn-common.pom(pom.original) (443ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-common;2.2.0!hadoop-yarn-common.pom(pom.original) (238ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-yarn;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-yarn;2.2.0[0m
@@ -1963,7 +1963,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.2.0/hadoop-yarn-api-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.2.0/hadoop-yarn-api-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.2.0/hadoop-yarn-api-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-api;2.2.0!hadoop-yarn-api.pom(pom.original) (224ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-api;2.2.0!hadoop-yarn-api.pom(pom.original) (335ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-yarn;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-yarn;2.2.0[0m
@@ -3201,7 +3201,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.2.0/hadoop-yarn-client-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.2.0/hadoop-yarn-client-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.2.0/hadoop-yarn-client-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-client;2.2.0!hadoop-yarn-client.pom(pom.original) (256ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-client;2.2.0!hadoop-yarn-client.pom(pom.original) (273ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-yarn;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-yarn;2.2.0[0m
@@ -3308,7 +3308,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.2.0/hadoop-mapreduce-client-core-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.2.0/hadoop-mapreduce-client-core-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.2.0/hadoop-mapreduce-client-core-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-core;2.2.0!hadoop-mapreduce-client-core.pom(pom.original) (245ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-core;2.2.0!hadoop-mapreduce-client-core.pom(pom.original) (220ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-mapreduce-client;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-mapreduce-client;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-mapreduce-client;2.2.0[0m
@@ -3385,7 +3385,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.2.0/hadoop-yarn-server-common-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.2.0/hadoop-yarn-server-common-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.2.0/hadoop-yarn-server-common-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-server-common;2.2.0!hadoop-yarn-server-common.pom(pom.original) (257ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-server-common;2.2.0!hadoop-yarn-server-common.pom(pom.original) (228ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn-server;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-yarn-server;2.2.0 {}[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn-server;2.2.0 ...[0m
@@ -3399,7 +3399,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server/2.2.0/hadoop-yarn-server-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server/2.2.0/hadoop-yarn-server-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server/2.2.0/hadoop-yarn-server-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-server;2.2.0!hadoop-yarn-server.pom(pom.original) (239ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-server;2.2.0!hadoop-yarn-server.pom(pom.original) (264ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-yarn;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-yarn;2.2.0[0m
@@ -3507,7 +3507,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.2.0/hadoop-mapreduce-client-shuffle-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.2.0/hadoop-mapreduce-client-shuffle-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.2.0/hadoop-mapreduce-client-shuffle-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-shuffle;2.2.0!hadoop-mapreduce-client-shuffle.pom(pom.original) (228ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-shuffle;2.2.0!hadoop-mapreduce-client-shuffle.pom(pom.original) (243ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-mapreduce-client;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-mapreduce-client;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-mapreduce-client;2.2.0[0m
@@ -3571,7 +3571,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.2.0/hadoop-mapreduce-client-jobclient-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.2.0/hadoop-mapreduce-client-jobclient-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.2.0/hadoop-mapreduce-client-jobclient-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-jobclient;2.2.0!hadoop-mapreduce-client-jobclient.pom(pom.original) (271ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-jobclient;2.2.0!hadoop-mapreduce-client-jobclient.pom(pom.original) (306ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-mapreduce-client;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-mapreduce-client;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-mapreduce-client;2.2.0[0m
@@ -4032,7 +4032,7 @@
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.2.0/hadoop-yarn-server-nodemanager-2.2.0.pom[0m
 [0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.2.0/hadoop-yarn-server-nodemanager-2.2.0.pom.sha1[0m
 [0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.2.0/hadoop-yarn-server-nodemanager-2.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-server-nodemanager;2.2.0!hadoop-yarn-server-nodemanager.pom(pom.original) (481ms)[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-server-nodemanager;2.2.0!hadoop-yarn-server-nodemanager.pom(pom.original) (235ms)[0m
 [0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn-server;2.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.hadoop#hadoop-yarn-server;2.2.0 {}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.hadoop#hadoop-yarn-server;2.2.0[0m
@@ -13408,7 +13408,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-io#commons-io;2.4!commons-io.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 19305ms :: artifacts dl 219ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 16632ms :: artifacts dl 368ms[0m
 [0m[[0mdebug[0m] [0m	report for countmessagebycounty#countmessagebycounty_2.10;1.0 compile produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/target/resolution-cache/reports/countmessagebycounty-countmessagebycounty_2.10-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for countmessagebycounty#countmessagebycounty_2.10;1.0 runtime produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/target/resolution-cache/reports/countmessagebycounty-countmessagebycounty_2.10-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for countmessagebycounty#countmessagebycounty_2.10;1.0 test produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/target/resolution-cache/reports/countmessagebycounty-countmessagebycounty_2.10-test.xml[0m
@@ -13422,5 +13422,5 @@
 [0m[[0mdebug[0m] [0m	report for countmessagebycounty#countmessagebycounty_2.10;1.0 docs produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/target/resolution-cache/reports/countmessagebycounty-countmessagebycounty_2.10-docs.xml[0m
 [0m[[0mdebug[0m] [0m	report for countmessagebycounty#countmessagebycounty_2.10;1.0 pom produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/target/resolution-cache/reports/countmessagebycounty-countmessagebycounty_2.10-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for countmessagebycounty#countmessagebycounty_2.10;1.0 scala-tool produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/target/resolution-cache/reports/countmessagebycounty-countmessagebycounty_2.10-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (19305ms resolve - 219ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (16632ms resolve - 368ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

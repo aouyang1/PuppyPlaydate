@@ -5,28 +5,37 @@
 [0m[[0mdebug[0m] [0m	refresh = false[0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'compile'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.11.2 [compile->default(compile)][0m
-[0m[[0minfo[0m] [0mResolving com.eed3si9n#sbt-assembly;0.11.2 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.eed3si9n#sbt-assembly;0.11.2 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.eed3si9n#sbt-assembly;0.11.2[0m
-[0m[[0mdebug[0m] [0m	found com.eed3si9n#sbt-assembly;0.11.2 in sbt-chain[0m
-[0m[[0mdebug[0m] [0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.10.2 {provided=[default(compile)]} => dependency: org.scala-lang#scala-library;2.10.4 {provided=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving com.eed3si9n#sbt-assembly;0.12.0 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.eed3si9n#sbt-assembly;0.12.0 {compile=[default(compile)]}[0m
+[0m[[0minfo[0m] [0mResolving com.eed3si9n#sbt-assembly;0.12.0 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: com.eed3si9n#sbt-assembly;0.12.0 {compile=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m		tried https://repo.typesafe.com/typesafe/ivy-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	typesafe-ivy-releases: no ivy file found for com.eed3si9n#sbt-assembly;0.12.0[0m
+[0m[[0mdebug[0m] [0m		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	sbt-plugin-releases: found md file for com.eed3si9n#sbt-assembly;0.12.0[0m
+[0m[[0mdebug[0m] [0m		=> https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml (0.12.0)[0m
+[0m[[0mdebug[0m] [0mdownloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml ...[0m
+[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.12.0!ivy.xml(ivy.original) (1613ms)[0m
+[0m[[0mdebug[0m] [0m	found com.eed3si9n#sbt-assembly;0.12.0 in sbt-plugin-releases[0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'runtime'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.11.2 [compile->default(compile)][0m
-[0m[[0mdebug[0m] [0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.10.2 {provided=[default(compile)]} => dependency: org.scala-lang#scala-library;2.10.4 {provided=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [test][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.11.2 [compile->default(compile)][0m
-[0m[[0mdebug[0m] [0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.10.2 {provided=[default(compile)]} => dependency: org.scala-lang#scala-library;2.10.4 {provided=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'provided'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [provided][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4307550e[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@63dcea20[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.10.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.10.4] org.scala-lang#scala-library;2.10.4[0m
@@ -734,8 +743,7 @@
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'compile-internal'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile-internal][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.11.2 [compile->default(compile)][0m
-[0m[[0mdebug[0m] [0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.10.2 {provided=[default(compile)]} => dependency: org.scala-lang#scala-library;2.10.4 {provided=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [optional][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [provided][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)][0m
@@ -1229,16 +1237,14 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [runtime-internal][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.11.2 [compile->default(compile)][0m
-[0m[[0mdebug[0m] [0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.10.2 {provided=[default(compile)]} => dependency: org.scala-lang#scala-library;2.10.4 {provided=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [optional][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test-internal'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [test-internal][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [test][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.11.2 [compile->default(compile)][0m
-[0m[[0mdebug[0m] [0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.10.2 {provided=[default(compile)]} => dependency: org.scala-lang#scala-library;2.10.4 {provided=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [optional][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#scala_batch-build;0.1-SNAPSHOT [provided][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)][0m
@@ -1779,7 +1785,12 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#scala_batch-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [scala-tool->optional(default)][0m
 [0m[[0mdebug[0m] [0m	resolved ivy file produced in cache[0m
 [0m[[0mdebug[0m] [0m:: downloading artifacts ::[0m
-[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.eed3si9n#sbt-assembly;0.11.2!sbt-assembly.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar ...[0m
+[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar[0m
+[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.12.0!sbt-assembly.jar (2427ms)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-library;2.10.4!scala-library.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#sbt;0.13.7!sbt.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#main;0.13.7!main.jar[0m
@@ -1835,7 +1846,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.7!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 4890ms :: artifacts dl 88ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 9835ms :: artifacts dl 2565ms[0m
 [0m[[0mdebug[0m] [0m	report for default#scala_batch-build;0.1-SNAPSHOT compile produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/project/target/resolution-cache/reports/default-scala_batch-build-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#scala_batch-build;0.1-SNAPSHOT runtime produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/project/target/resolution-cache/reports/default-scala_batch-build-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#scala_batch-build;0.1-SNAPSHOT test produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/project/target/resolution-cache/reports/default-scala_batch-build-test.xml[0m
@@ -1849,5 +1860,5 @@
 [0m[[0mdebug[0m] [0m	report for default#scala_batch-build;0.1-SNAPSHOT docs produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/project/target/resolution-cache/reports/default-scala_batch-build-docs.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#scala_batch-build;0.1-SNAPSHOT pom produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/project/target/resolution-cache/reports/default-scala_batch-build-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#scala_batch-build;0.1-SNAPSHOT scala-tool produced in /home/ubuntu/PuppyPlaydate/spark/scala_batch/project/target/resolution-cache/reports/default-scala_batch-build-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (4890ms resolve - 88ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (9835ms resolve - 2565ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
