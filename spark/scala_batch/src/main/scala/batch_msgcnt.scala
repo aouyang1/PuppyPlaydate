@@ -14,7 +14,7 @@ object batch_msgcnt {
     val jsonRDD = sc.textFile(textFile)
     val parsedRDD = jsonRDD.map( x => parse(x) )
     
-    
+    /* 
     // all time historical count by county
     val mapped_county_full = parsedRDD.map( x => (compact(render(x \ "county")).tail.dropRight(1) , 1) )
     val county_full_cnt = mapped_county_full.reduceByKey(_+_)
@@ -48,7 +48,7 @@ object batch_msgcnt {
     county_day_cnt_tup.saveToCassandra("test", "by_county_day", SomeColumns("county","year","month","day","cnt"))
 
 
-
+    */
 
     // historical count by county and hour
     val mapped_county_hour = parsedRDD.map( x=> ({val date_array = compact(x \ "timestamp").tail.dropRight(1).split(",")
