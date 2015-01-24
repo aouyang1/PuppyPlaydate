@@ -13,6 +13,7 @@ class Consumer(object):
         self.tempfile = None
         self.topic = topic
         self.group = group
+        self.block_cnt = 0
 
     def flush_to_hdfs(self, output_dir):
         self.tempfile.close()
@@ -20,6 +21,9 @@ class Consumer(object):
         timestamp = time.strftime('%Y%m%d%H%M%S')
  
         hadoop_path = "/user/PuppyPlaydate/kafka/%s_%s_%s.dat" % (self.group, self.topic, timestamp)
+        print "Block " + str(self.block_cnt) + ": Flushing 20MB file to HDFS => " + hadoop_path
+        self.block_cnt += 1
+
         os.system("sudo -u hdfs hdfs dfs -put %s %s" % (self.tempfile_path, hadoop_path))
        
         os.remove(self.tempfile_path)
@@ -38,6 +42,7 @@ class Consumer(object):
         self.tempfile_path = "/home/ubuntu/PuppyPlaydate/kafka/kafka_messages/kafka_%s_%s_%s.dat" % (self.topic, self.group, timestamp)
         self.tempfile = open(self.tempfile_path,"w")
         log_has_at_least_one = False #did we log at least one entry?
+	block_cnt = 0
         while True:
             messages = self.consumer.get_messages(count=1000, block=False) #get 1000 messages at a time, non blocking
             
