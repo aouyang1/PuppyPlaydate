@@ -32,7 +32,7 @@ def login():
 @app.route('/county/')
 def county_full():
     start_time = time.time()
-    county_full = session.execute('SELECT * FROM by_county_full ORDER BY county')
+    county_full = session.execute('SELECT * FROM by_county_full')
     print time.time() - start_time
 
     start_time = time.time()
