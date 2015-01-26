@@ -23,12 +23,19 @@ object StreamExample {
     val topics = Map("messages" -> 1)
     val kafkaStream = KafkaUtils.createStream(ssc, zkQuorum, groupID, topics)
 
-    val stream = kafkaStream.map(x => x._2)
+    val num_stream_elem = kafkaStream.count()
+    //val stream = kafkaStream.map(x => x._2)
 
-    stream.print()
+    //stream.print()
+    
+    num_stream_elem.print()
+
+    val num_stream_win_elem = kafkaStream.countByWindow(Seconds(5), Seconds(1))
+
+    num_stream_win_elem.print()
     
     ssc.start()
     ssc.awaitTermination()
-}
+  }
 
 }
