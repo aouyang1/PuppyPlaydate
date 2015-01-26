@@ -14,11 +14,11 @@ object batch_msgcnt {
     val jsonRDD = sc.textFile(textFile)
     val parsedRDD = jsonRDD.map( x => parse(x) )
     
-    /* 
+     
     // all time historical count by county
     val mapped_county_full = parsedRDD.map( x => (compact(render(x \ "county")).tail.dropRight(1) , 1) )
     val county_full_cnt = mapped_county_full.reduceByKey(_+_)
-    county_full_cnt.saveToCassandra("test", "by_county_full", SomeColumns("county","cnt"))
+    county_full_cnt.saveToCassandra("ppd", "by_county_full", SomeColumns("county","cnt"))
     
 
 
@@ -30,8 +30,8 @@ object batch_msgcnt {
                                                     date_array(1)} , 1) )
     val county_month_cnt = mapped_county_month.reduceByKey(_+_)    
     val county_month_cnt_tup = county_month_cnt.map( x =>  {val k = x._1.split(",")
-                                                        (k(0), k(1).toInt, k(2).toInt, x._2)} )
-    county_month_cnt_tup.saveToCassandra("test", "by_county_month", SomeColumns("county","year","month","cnt"))
+                                                        (k(0), ({if (k(1).length==1) "0"+k(1) else k(1)} + {if (k(2).length==1) "0"+k(2) else k(2)}).toInt, x._2)} )
+    county_month_cnt_tup.saveToCassandra("ppd", "by_county_month", SomeColumns("county","date","cnt"))
    
 
 
@@ -44,11 +44,11 @@ object batch_msgcnt {
                                                  date_array(2)}, 1) )
     val county_day_cnt = mapped_county_day.reduceByKey(_+_)
     val county_day_cnt_tup = county_day_cnt.map( x =>  {val k = x._1.split(",")
-                                                        (k(0), k(1).toInt, k(2).toInt, k(3).toInt, x._2)} )
-    county_day_cnt_tup.saveToCassandra("test", "by_county_day", SomeColumns("county","year","month","day","cnt"))
+                                                        (k(0), ({if (k(1).length==1) "0"+k(1) else k(1)} + {if (k(2).length==1) "0"+k(2) else k(2)} + {if (k(3).length==1) "0"+k(3) else k(3)}).toInt, x._2)} )
+    county_day_cnt_tup.saveToCassandra("ppd", "by_county_day", SomeColumns("county","date","cnt"))
 
 
-    */
+    
 
     // historical count by county and hour
     val mapped_county_hour = parsedRDD.map( x=> ({val date_array = compact(x \ "timestamp").tail.dropRight(1).split(",")
@@ -59,9 +59,9 @@ object batch_msgcnt {
                                                  date_array(3)}, 1) )
     val county_hour_cnt = mapped_county_hour.reduceByKey(_+_)
     val county_hour_cnt_tup = county_hour_cnt.map( x =>  {val k = x._1.split(",")
-                                                        (k(0), k(1).toInt, k(2).toInt, k(3).toInt, k(4).toInt, x._2)} )
+                                                        (k(0), ({if (k(1).length==1) "0"+k(1) else k(1)} + {if (k(2).length==1) "0"+k(2) else k(2)} + {if (k(3).length==1) "0"+k(3) else k(3)} + {if (k(4).length==1) "0"+k(4) else k(4)}).toInt, x._2)} )
 
-    county_hour_cnt_tup.saveToCassandra("test", "by_county_hour", SomeColumns("county","year","month","day","hour","cnt"))
+    county_hour_cnt_tup.saveToCassandra("ppd", "by_county_hour", SomeColumns("county","date","cnt"))
     
 }
 
