@@ -1,1 +1,15 @@
-[0m[[0mdebug[0m] [0mJar uptodate: /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/stream_example_2.10-1.0.jar[0m
+[0m[[0minfo[0m] [0mPackaging /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/stream_example_2.10-1.0.jar ...[0m
+[0m[[0mdebug[0m] [0mInput file mappings:[0m
+[0m[[0mdebug[0m] [0m	StreamExample$$anonfun$4.class[0m
+[0m[[0mdebug[0m] [0m	  /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/classes/StreamExample$$anonfun$4.class[0m
+[0m[[0mdebug[0m] [0m	StreamExample$.class[0m
+[0m[[0mdebug[0m] [0m	  /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/classes/StreamExample$.class[0m
+[0m[[0mdebug[0m] [0m	StreamExample$$anonfun$2.class[0m
+[0m[[0mdebug[0m] [0m	  /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/classes/StreamExample$$anonfun$2.class[0m
+[0m[[0mdebug[0m] [0m	StreamExample$$anonfun$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/classes/StreamExample$$anonfun$1.class[0m
+[0m[[0mdebug[0m] [0m	StreamExample$$anonfun$3.class[0m
+[0m[[0mdebug[0m] [0m	  /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/classes/StreamExample$$anonfun$3.class[0m
+[0m[[0mdebug[0m] [0m	StreamExample.class[0m
+[0m[[0mdebug[0m] [0m	  /home/ubuntu/PuppyPlaydate/spark/scala_stream/target/scala-2.10/classes/StreamExample.class[0m
+[0m[[0minfo[0m] [0mDone packaging.[0m

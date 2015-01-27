@@ -16,26 +16,28 @@ class Producer(object):
     def __init__(self, addr):
         self.client = KafkaClient(addr)
         self.producer = SimpleProducer(self.client)
-        self.cs_list = self.parse_county_list()
-        self.num_counties = len(self.cs_list)
+        self.county_and_state_list = self.parse_county_list('county_list.txt')
+        self.num_counties = len(self.county_and_state_list)
         self.num_users = 1000000
 
-    
-    def parse_county_list(self):
+    def parse_county_list(self, filename):
         cnt = 0
-        cs_list = []
-        with open('county_list.txt') as f:
+        county_state_list = []
+        with open(filename) as f:
             for line in f:
                 if 6 <= cnt <= 45085:
-                    split_line = line.split('|')
+                    county_state = line.split('|')[3]
 
-                    county_state = split_line[3]
+                    parsed_county_state = [county_state_row.strip() for county_state_row in county_state.split(',')]
+                    if len(parsed_county_state) == 1:
+                        parsed_county_state = parsed_county_state.append("DC")
 
-                    cs_list.append([ls.strip() for ls in county_state.split(',')])
+                    if parsed_county_state:
+                        county_state_list.append(parsed_county_state)
 
                 cnt += 1
 
-        return cs_list
+        return county_state_list
 
 
     def sim_msg_stream(self):
@@ -43,8 +45,9 @@ class Producer(object):
         msg_id = 0
 
         while True:
-            
-            message_info = {"county": self.cs_list[np.random.randint(self.num_counties)],
+            county_random_index = np.random.randint(self.num_counties)
+            message_info = {"county": self.county_and_state_list[county_random_index][0],
+ 			    "state": self.county_and_state_list[county_random_index][1],
                             "rank": 0,
                             "timestamp": list(time.localtime()[0:6]),
                             "creatorID": np.random.randint(self.num_users),
@@ -59,6 +62,6 @@ class Producer(object):
             msg_id += 1
 
             
-
-prod = Producer("localhost:9092")
-prod.sim_msg_stream()
+if __name__ == "__main__":
+    prod = Producer("localhost:9092")
+    prod.sim_msg_stream()
