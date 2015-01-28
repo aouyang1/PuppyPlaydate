@@ -9,7 +9,7 @@ import time
 
 app = Flask(__name__)
 cluster = Cluster(['54.215.184.69'])
-session = cluster.connect('test')
+session = cluster.connect('puppy')
 
 @app.route('/')
 def home():
@@ -50,50 +50,32 @@ def county_full():
     start_time = time.time()
     counties = ""    
     for row in county_full:
-        counties += row.county + ": " + str(row.cnt) + "<br>"
+        counties += row.state + "," + row.county + ": " + str(row.count) + "<br>"
     print time.time() - start_time
 
     return counties
 
-@app.route('/monthly')
-def county_month(chartID = 'chart_ID2', chart_type = 'line', chart_height = 350):    
-    start_time = time.time()
-    county = "Dallas County"
-    county_month = session.execute("SELECT * FROM by_county_month WHERE county = '" + county + "'")
-    print time.time() - start_time
+@app.route('/monthly/')
+def county_month(county="Dallas County", state="TX"):
 
-    start_time = time.time()
-    counties_month = ""
+    county = "Denton County"
+    state = "TX"
+
+    county_month = session.execute("SELECT * FROM by_county_month WHERE state = '" + state + "' AND county = '" + county + "'")
 
     def date_to_milli(time_tuple):
         epoch_sec = time.mktime((1970, 1, 1, 0, 0, 0, 0, 0, 0))
         return 1000*int(time.mktime(time_tuple) - epoch_sec)
 
-
-    data = []
+    historical_data = []
     for row in county_month:
-        data.append([date_to_milli((row.year, row.month, 0, 0, 0, 0, 0, 0, 0)), row.cnt])        
-        counties_month += row.county + ": (" + str(row.year) + "," + str(row.month) + ") " + str(row.cnt) + "<br>"
-    print time.time() - start_time
+        curr_date = row.date
+        year = curr_date/100
+        month = curr_date - year*100
+        historical_data.append([date_to_milli((year, month, 0, 0, 0, 0, 0, 0, 0)), row.count])
 
+    return render_template('index.html', state=state, county=county, historical_data=historical_data)
 
-
-    chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
-    series = [{"name": county, "data": data}]
-    title = {"text": "Meetups in " + county + " each month"}
-    xAxis = {"type": 'datetime', 
-             #"dateTimeLabelFormats": {"month": '%e. %b',
-             #                         "year":  '%b'},
-             "title": {"text": 'Date'}
-             }
-    yAxis = {"title": {"text": '# of Meetups'},
-             "min": 0
-             }
-    return render_template('index.html', chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
-
-
-
-    #return counties_month
 
 @app.route('/daily/<county>/')
 def county_day(county):   
