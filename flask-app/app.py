@@ -72,6 +72,10 @@ def county_full():
     return counties
 
 
+@app.route('/update_map/')
+def update_map():
+    return "MEH"
+
 
 @app.route('/update_chart/<county_code>/')
 def update_chart(county_code):
