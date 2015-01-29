@@ -1,7 +1,8 @@
 __author__ = 'aouyang1'
 
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from cassandra.cluster import Cluster
+import csv
 import time
 import pandas as pd
 import numpy as np
@@ -10,6 +11,21 @@ import time
 app = Flask(__name__)
 cluster = Cluster(['54.215.184.69'])
 session = cluster.connect('puppy')
+
+
+county_code_file = open('county_codes.csv','rb')
+wr = csv.reader(county_code_file)
+codes = [code for code in wr][0]
+
+county_name_file = open('county_names.csv','rb')
+wr = csv.reader(county_name_file)
+names = [name for name in wr][0]
+
+county_code_dict = {}
+for name, code in zip(names, codes):
+    county_code_dict[name] = code
+
+code_county_dict = {code: name for name, code in county_code_dict.items()}
 
 @app.route('/')
 def home():
@@ -55,6 +71,33 @@ def county_full():
 
     return counties
 
+
+
+@app.route('/update_chart/<county_code>/')
+def update_chart(county_code):
+
+    county = code_county_dict[county_code]
+    county_state = [county_attr.strip() for county_attr in county.split(",")]
+
+    county = county_state[0]
+    state = county_state[1]
+
+    county_month = session.execute("SELECT * FROM by_county_month WHERE state = '" + state + "' AND county = '" + county + "'")
+
+    def date_to_milli(time_tuple):
+        epoch_sec = time.mktime((1970, 1, 1, 0, 0, 0, 0, 0, 0))
+        return 1000*int(time.mktime(time_tuple) - epoch_sec)
+
+    historical_data = []
+    for row in county_month:
+        curr_date = row.date
+        year = curr_date/100
+        month = curr_date - year*100
+        historical_data.append([date_to_milli((year, month, 0, 0, 0, 0, 0, 0, 0)), row.count])
+
+    return jsonify(state=state, county=county, historical_data=historical_data)
+
+
 @app.route('/monthly/')
 def county_month(county="Dallas County", state="TX"):
 
@@ -73,6 +116,21 @@ def county_month(county="Dallas County", state="TX"):
         year = curr_date/100
         month = curr_date - year*100
         historical_data.append([date_to_milli((year, month, 0, 0, 0, 0, 0, 0, 0)), row.count])
+
+
+    county_code_file = open('county_codes.csv','rb')
+    wr = csv.reader(county_code_file)
+    codes = [code for code in wr][0]
+
+    county_name_file = open('county_names.csv','rb')
+    wr = csv.reader(county_name_file)
+    names = [name for name in wr][0]
+
+    county_dict = {}
+    for name, code in zip(names, codes):
+        county_dict[name] = code
+
+
 
     return render_template('index.html', state=state, county=county, historical_data=historical_data)
 

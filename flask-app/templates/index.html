@@ -3,7 +3,9 @@
 <meta name="viewport" content = "width=device-width, initial-scale=1.0">
 <head>
 </head>
- 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <body class = "body">
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
@@ -62,15 +64,40 @@
 
     <body>
 
+        <!--
+        <div id="county_map" style="height: 300; width: 400"></div>
+        <div id="monthly_meetups" class={.inline{display: inline-block}} style="height: 300; width: 400"></div>
+        -->
 
+        <div class="container-fluid">
+          <div class="row">
+            <div id="county_map" class="col-md-6" style="height: 700"></div>
+            <div class="col-md-6">
+              <div class="row">
+                  <div id="monthly_meetups" style="height:250"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="well"  style="height: 425">
+                    Message
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="well" style="height: 425">
+                    Live Feed
+                  </div>
+                </div>
 
-        <div id="monthly_meetups" style="height: 300; width: 800"></div>
-        <div id="county_map" style="height: 300; width: 800"></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <script>
             var state = "{{ state }}"
             var county = "{{ county }}"
             var historical_data = {{ historical_data }}
+
         </script>
 
 
@@ -78,12 +105,25 @@
 
 </body>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-<script src="../static/highcharts.js"></script>
-<script src="../static/graph_multi.js"></script>
 
-<script type = "text/javascript" src = "/static/bootstrap.min.js"></script>
- 
+<script src="../static/js/highcharts.js"></script>
+<script src="../static/js/map.js"></script>
+<script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+<script src="http://code.highcharts.com/mapdata/countries/us/us-all-all.js"></script>
+
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide-full.min.js"></script>
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/media/com_demo/highslide.css" />
+
+
+<script src="../static/js/graph_multi.js"></script>
+
+
+
+
+<script type = "text/javascript" src = "/static/js/bootstrap.min.js"></script>
+
+
  
 </html>
