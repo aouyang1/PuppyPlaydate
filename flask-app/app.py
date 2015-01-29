@@ -74,7 +74,17 @@ def county_full():
 
 @app.route('/update_map/')
 def update_map():
-    return "MEH"
+    county_rt = session.execute("SELECT * FROM by_county_rt")
+
+    # example format [{"code":"us-al-001","name":"Autauga County, AL","value":6.3},...]
+
+    rt_data = []
+    for county in county_rt:
+        county_name_in_dict = "{}, {}".format(county.county, county.state)
+        county_code = county_code_dict[county_name_in_dict]
+        rt_data.append({"code": county_code, "name": county_name_in_dict, "value": county.count})
+
+    return jsonify(rt_data=rt_data)
 
 
 @app.route('/update_chart/<county_code>/')

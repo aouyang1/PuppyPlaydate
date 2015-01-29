@@ -25,10 +25,8 @@ $(function () {
                                          url: '/update_map/',
                                          success: function(data) {
                                             console.log("GO GET SOME DATA!")
-                                            $.each(default_data, function () {
-                                                this.value = Math.round(Math.random() * 20);
-                                            });
-                                            series.setData(default_data)
+
+                                            series.setData(data.rt_data)
                                          }
                                     })
                                 }, 5000);
