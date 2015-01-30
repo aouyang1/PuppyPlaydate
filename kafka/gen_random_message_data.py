@@ -15,11 +15,11 @@ def parse_county_list():
         for line in f:
             if 6 <= cnt <= 45085:
                 county_state = line.split('|')[3]
-		
+
 		parsed_county_state = [county_state_row.strip() for county_state_row in county_state.split(',')]
 		if len(parsed_county_state) == 1:
 		    parsed_county_state = parsed_county_state.append("DC")
-		
+
 		if parsed_county_state:
 	            county_state_list.append(parsed_county_state)
 

@@ -47,7 +47,7 @@ class Producer(object):
         while True:
             county_random_index = np.random.randint(self.num_counties)
             message_info = {"county": self.county_and_state_list[county_random_index][0],
- 			    "state": self.county_and_state_list[county_random_index][1],
+ 			                "state": self.county_and_state_list[county_random_index][1],
                             "rank": 0,
                             "timestamp": list(time.localtime()[0:6]),
                             "creatorID": np.random.randint(self.num_users),

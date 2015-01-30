@@ -1,7 +1,8 @@
 __author__ = 'aouyang1'
 
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from cassandra.cluster import Cluster
+import csv
 import time
 import pandas as pd
 import numpy as np
@@ -9,7 +10,22 @@ import time
 
 app = Flask(__name__)
 cluster = Cluster(['54.215.184.69'])
-session = cluster.connect('test')
+session = cluster.connect('puppy')
+
+
+county_code_file = open('county_codes.csv','rb')
+wr = csv.reader(county_code_file)
+codes = [code for code in wr][0]
+
+county_name_file = open('county_names.csv','rb')
+wr = csv.reader(county_name_file)
+names = [name for name in wr][0]
+
+county_code_dict = {}
+for name, code in zip(names, codes):
+    county_code_dict[name] = code
+
+code_county_dict = {code: name for name, code in county_code_dict.items()}
 
 @app.route('/')
 def home():
@@ -50,50 +66,94 @@ def county_full():
     start_time = time.time()
     counties = ""    
     for row in county_full:
-        counties += row.county + ": " + str(row.cnt) + "<br>"
+        counties += row.state + "," + row.county + ": " + str(row.count) + "<br>"
     print time.time() - start_time
 
     return counties
 
-@app.route('/monthly')
-def county_month(chartID = 'chart_ID2', chart_type = 'line', chart_height = 350):    
-    start_time = time.time()
-    county = "Dallas County"
-    county_month = session.execute("SELECT * FROM by_county_month WHERE county = '" + county + "'")
-    print time.time() - start_time
+@app.route('/new_messages/<county>/')
+def update_messages(county):
+    # query cassandra for top 10 recent messages from a county
+    # format into "timestamp user: message"
+    message_list = ["message1","message2","message3","message4","message5","message6","message7","message8","message9","message10"]
+    return jsonify(msg=message_list)
 
-    start_time = time.time()
-    counties_month = ""
+@app.route('/update_map/')
+def update_map():
+    county_rt = session.execute("SELECT * FROM by_county_rt")
+
+    # example format [{"code":"us-al-001","name":"Autauga County, AL","value":6.3},...]
+
+    rt_data = []
+    for county in county_rt:
+        county_name_in_dict = "{}, {}".format(county.county, county.state)
+        county_code = county_code_dict[county_name_in_dict]
+        rt_data.append({"code": county_code, "name": county_name_in_dict, "value": county.count})
+
+    return jsonify(rt_data=rt_data)
+
+
+@app.route('/update_chart/<county_code>/')
+def update_chart(county_code):
+
+    county = code_county_dict[county_code]
+    county_state = [county_attr.strip() for county_attr in county.split(",")]
+
+    county = county_state[0]
+    state = county_state[1]
+
+    county_month = session.execute("SELECT * FROM by_county_month WHERE state = '" + state + "' AND county = '" + county + "'")
 
     def date_to_milli(time_tuple):
         epoch_sec = time.mktime((1970, 1, 1, 0, 0, 0, 0, 0, 0))
         return 1000*int(time.mktime(time_tuple) - epoch_sec)
 
-
-    data = []
+    historical_data = []
     for row in county_month:
-        data.append([date_to_milli((row.year, row.month, 0, 0, 0, 0, 0, 0, 0)), row.cnt])        
-        counties_month += row.county + ": (" + str(row.year) + "," + str(row.month) + ") " + str(row.cnt) + "<br>"
-    print time.time() - start_time
+        curr_date = row.date
+        year = curr_date/100
+        month = curr_date - year*100
+        historical_data.append([date_to_milli((year, month, 0, 0, 0, 0, 0, 0, 0)), row.count])
+
+    return jsonify(state=state, county=county, historical_data=historical_data)
+
+
+@app.route('/monthly/')
+def county_month(county="Dallas County", state="TX"):
+
+    county = "Denton County"
+    state = "TX"
+
+    county_month = session.execute("SELECT * FROM by_county_month WHERE state = '" + state + "' AND county = '" + county + "'")
+
+    def date_to_milli(time_tuple):
+        epoch_sec = time.mktime((1970, 1, 1, 0, 0, 0, 0, 0, 0))
+        return 1000*int(time.mktime(time_tuple) - epoch_sec)
+
+    historical_data = []
+    for row in county_month:
+        curr_date = row.date
+        year = curr_date/100
+        month = curr_date - year*100
+        historical_data.append([date_to_milli((year, month, 0, 0, 0, 0, 0, 0, 0)), row.count])
+
+
+    county_code_file = open('county_codes.csv','rb')
+    wr = csv.reader(county_code_file)
+    codes = [code for code in wr][0]
+
+    county_name_file = open('county_names.csv','rb')
+    wr = csv.reader(county_name_file)
+    names = [name for name in wr][0]
+
+    county_dict = {}
+    for name, code in zip(names, codes):
+        county_dict[name] = code
 
 
 
-    chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
-    series = [{"name": county, "data": data}]
-    title = {"text": "Meetups in " + county + " each month"}
-    xAxis = {"type": 'datetime', 
-             #"dateTimeLabelFormats": {"month": '%e. %b',
-             #                         "year":  '%b'},
-             "title": {"text": 'Date'}
-             }
-    yAxis = {"title": {"text": '# of Meetups'},
-             "min": 0
-             }
-    return render_template('index.html', chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
+    return render_template('index.html', state=state, county=county, historical_data=historical_data, maybe_var=["HAHAHHAHA!","heh"])
 
-
-
-    #return counties_month
 
 @app.route('/daily/<county>/')
 def county_day(county):   
