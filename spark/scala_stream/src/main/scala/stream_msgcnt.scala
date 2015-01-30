@@ -9,6 +9,7 @@ import org.apache.log4j.Logger
 import org.apache.log4j.Level
 import com.datastax.spark.connector._
 import com.datastax.spark.connector.streaming._
+import com.datastax.driver.core.utils._
 
 object StreamExample {
   def main(args: Array[String]) {
@@ -23,21 +24,27 @@ object StreamExample {
     val topics = Map("messages" -> 1)
     val kafkaStream = KafkaUtils.createStream(ssc, zkQuorum, groupID, topics)
 
+    def single_to_double(digit: String): String = if (digit.length==1) "0"+digit else digit
+
 
     val parsed_message = kafkaStream.map( x => parse(x._2) ).cache()
     
-    val messages_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), 1) )
-    val reduced_messages_by_county = messages_by_county.reduceByKey( _ + _ )
-    val tup_messages_by_county = reduced_messages_by_county.map( tup => {val state_county = tup._1.split(",")
+    val messag_counts_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), 1) )
+    val reduced_message_counts_by_county = message_counts_by_county.reduceByKey( _ + _ )
+    val tup_message_counts_by_county = reduced_message_counts_by_county.map( tup => {val state_county = tup._1.split(",")
  								        (state_county(0).tail.dropRight(1), state_county(1).tail.dropRight(1), tup._2)})
     
-    //val messages_by_state = parsed_message.map( message => (compact(render( message \ "state" )).tail.dropRight(1), 1) )
-    //val tup_messages_by_state = messages_by_state.reduceByKey( _ + _ )
+    tup_message_counts_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
 
 
-    tup_messages_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
-    //tup_messages_by_state.saveToCassandra("puppy", "by_state_rt", SomeColumns("state", "count") )
+    val messages_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), message) )
+    val reduced_messages_by_county = messages_by_county.reduceByKey( _ + _ )
+    val tup_messages_by_county = reduced_messages_by_county.map( tup => {val state_county = tup._1.split(",")
+                                                                        (state_county(0).tail.dropRight(1), state_county(1).tail.dropRight(1), tup._2)})
     
+    tup_messages_by_county.saveToCassandra("puppy", "by_county_rt_msgs", SomeColumns("state", "county", "messages") )
+
+
     ssc.start()
     ssc.awaitTermination()
   }

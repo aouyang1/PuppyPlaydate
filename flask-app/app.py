@@ -71,6 +71,12 @@ def county_full():
 
     return counties
 
+@app.route('/new_messages/<county>/')
+def update_messages(county):
+    # query cassandra for top 10 recent messages from a county
+    # format into "timestamp user: message"
+    message_list = ["message1","message2","message3","message4","message5","message6","message7","message8","message9","message10"]
+    return jsonify(msg=message_list)
 
 @app.route('/update_map/')
 def update_map():
@@ -146,7 +152,7 @@ def county_month(county="Dallas County", state="TX"):
 
 
 
-    return render_template('index.html', state=state, county=county, historical_data=historical_data)
+    return render_template('index.html', state=state, county=county, historical_data=historical_data, maybe_var=["HAHAHHAHA!","heh"])
 
 
 @app.route('/daily/<county>/')

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a64dd9b-b777-4c67-ad59-3a38c3e0eddb" name="Default" comment="linked data from cassandra into highmaps">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flask-app/static/js/graph_multi.js" afterPath="$PROJECT_DIR$/flask-app/static/js/graph_multi.js" />
+    <list default="true" id="3a64dd9b-b777-4c67-ad59-3a38c3e0eddb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PuppyPlaydate.iws" />
@@ -30,7 +29,7 @@
       <file leaf-file-name="graph_multi.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flask-app/static/js/graph_multi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7229437" vertical-offset="1051" max-vertical-offset="1808">
+            <state vertical-scroll-proportion="0.7250362" vertical-offset="1051" max-vertical-offset="1808">
               <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
               <folding />
             </state>
@@ -364,13 +363,20 @@
       <option name="project" value="LOCAL" />
       <updated>1422529171889</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Tested out streaming of real time data from cassandra into web interface. Success">
+      <created>1422576058531</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1422576058531</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="423" y="0" width="1177" height="852" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34175533" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32692307" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -386,7 +392,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -411,7 +416,8 @@
     <MESSAGE value="major overhaul on graph_multi to pass data to and from server and client for map and chart" />
     <MESSAGE value="Can now randomly generate new data on map" />
     <MESSAGE value="linked data from cassandra into highmaps" />
-    <option name="LAST_COMMIT_MESSAGE" value="linked data from cassandra into highmaps" />
+    <MESSAGE value="Tested out streaming of real time data from cassandra into web interface. Success" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tested out streaming of real time data from cassandra into web interface. Success" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -587,7 +593,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flask-app/static/js/graph_multi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7229437" vertical-offset="1051" max-vertical-offset="1808">
+        <state vertical-scroll-proportion="0.7250362" vertical-offset="1051" max-vertical-offset="1808">
           <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
           <folding />
         </state>

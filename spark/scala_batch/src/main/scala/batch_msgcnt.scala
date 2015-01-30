@@ -36,15 +36,15 @@ object batch_msgcnt {
     // historical count by county and month
     val mapped_county_month = parsedRDD.map( x => ({val date_array = compact(x \ "timestamp").tail.dropRight(1).split(",")
                                                     compact(render(x \ "state")) + "," +
-						    compact(render(x \ "county")) + "," + 
+						                            compact(render(x \ "county")) + "," + 
                                                     date_array(0) + "," + 
                                                     date_array(1)} , 1) )
     val county_month_cnt = mapped_county_month.reduceByKey(_+_)    
     val county_month_cnt_tup = county_month_cnt.map( tup =>  {val keys = tup._1.split(",")
                                                              (keys(0).tail.dropRight(1), 
-							      keys(1).tail.dropRight(1), 
-							     (keys(2)+single_to_double(keys(3))).toInt, 
-							      tup._2)} )
+                            							      keys(1).tail.dropRight(1), 
+                            							     (keys(2)+single_to_double(keys(3))).toInt, 
+                            							      tup._2)} )
     county_month_cnt_tup.saveToCassandra("puppy", "by_county_month", SomeColumns("state", "county", "date", "count"))
    
 
@@ -70,7 +70,7 @@ object batch_msgcnt {
 
     // historical count by county and hour
     val mapped_county_hour = parsedRDD.map( x => ({val date_array = compact(x \ "timestamp").tail.dropRight(1).split(",")
-						 compact(render(x \ "state")) + "," +
+						                         compact(render(x \ "state")) + "," +
                                                  compact(render(x \ "county")) + "," + 
                                                  date_array(0) + "," +
                                                  date_array(1) + "," + 
@@ -78,10 +78,10 @@ object batch_msgcnt {
                                                  date_array(3)}, 1) )
     val county_hour_cnt = mapped_county_hour.reduceByKey(_+_)
     val county_hour_cnt_tup = county_hour_cnt.map( tup =>  {val keys = tup._1.split(",")
-                                                        (keys(0).tail.dropRight(1), 
-							 keys(1).tail.dropRight(1), 
-							(keys(2)+single_to_double(keys(3))+single_to_double(keys(4))+single_to_double(keys(5))).toInt, 
-							 tup._2)} )
+                                                           (keys(0).tail.dropRight(1), 
+                                						    keys(1).tail.dropRight(1), 
+                                						   (keys(2)+single_to_double(keys(3))+single_to_double(keys(4))+single_to_double(keys(5))).toInt, 
+                                						    tup._2)} )
 
     county_hour_cnt_tup.saveToCassandra("puppy", "by_county_hour", SomeColumns("state", "county", "date", "count"))
     

@@ -6,20 +6,20 @@ $(function () {
         var countiesMap = Highcharts.geojson(Highcharts.maps['countries/us/us-all-all']);
         var lines = Highcharts.geojson(Highcharts.maps['countries/us/us-all-all'], 'mapline');
 
-	    var monthly_meetups = new Highcharts.Chart({
-            chart: {renderTo: 'monthly_meetups',
-                    type: 'line',
-                    zoomType: 'x',
-                    resetZoomButton: { position: { x: 0,
-                                                   y: -30
-                                                 }
-                                     }
-                    },
-            title: {"text": "Meetups in " + county + ", " + state + " each month"},
-            xAxis: {"type": 'datetime', "title": {"text": 'Date'}},
-            yAxis: {"title": {"text": '# of Meetups'}, "min": 0},
-            series: [{"name": county + ", " + state, "data": historical_data}]
-	    });
+  	    var monthly_meetups = new Highcharts.Chart({
+              chart: {renderTo: 'monthly_meetups',
+                      type: 'line',
+                      zoomType: 'x',
+                      resetZoomButton: { position: { x: 0,
+                                                     y: -30
+                                                   }
+                                       }
+                      },
+              title: {"text": "Meetups in " + county + ", " + state + " each month"},
+              xAxis: {"type": 'datetime', "title": {"text": 'Date'}},
+              yAxis: {"title": {"text": '# of Meetups'}, "min": 0},
+              series: [{"name": county + ", " + state, "data": historical_data}]
+  	    });
 
         var county_map = new Highcharts.Map({
             chart: {renderTo: 'county_map',

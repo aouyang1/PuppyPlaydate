@@ -4,7 +4,14 @@
 <head>
 </head>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+<link href="../static/site.css" rel="stylesheet" type="text/css" />
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="../static/js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+
 
 <body class = "body">
 <nav class="navbar navbar-default" role="navigation">
@@ -83,9 +90,33 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="well" style="height: 425">
-                    Live Feed
-                  </div>
+                  
+                    
+                    <div class="panel panel-default">
+                    <div class="panel-heading"> <span class="glyphicon glyphicon-list-alt"></span><b>Current Meetups</b></div>
+                    <div class="panel-body">
+                      <div class="row">
+                        
+                        <ul id="demo3">
+                          <li id="message1" class="news-item"></li>
+                          <li id="message2" class="news-item"></li>
+                          <li id="message3" class="news-item"></li>
+                          <li id="message4" class="news-item"></li>
+                          <li id="message5" class="news-item"></li>
+                          <li id="message6" class="news-item"></li>
+                          <li id="message7" class="news-item"></li>
+                          <li id="message8" class="news-item"></li>
+                          <li id="message9" class="news-item"></li>
+                          <li id="message10" class="news-item"></li>
+
+                        </ul>
+                        
+                      </div>
+                    </div>
+                    <div class="panel-footer"> </div>
+                    </div>
+                    
+                  
                 </div>
 
               </div>
@@ -97,9 +128,44 @@
             var state = "{{ state }}"
             var county = "{{ county }}"
             var historical_data = {{ historical_data }}
-
         </script>
 
+        <script type="text/javascript">
+            $(function () {
+                $("#demo3").bootstrapNews({
+                    newsPerPage: 5,
+                    autoplay: false,
+                    
+                    onToDo: function () {
+                        //console.log(this);
+                    }
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+          $(function () {
+            setInterval(function () {
+                var county = "Dallas County"
+                $.ajax({ type: "GET",
+                         url: '/new_messages/' + county + "/",
+                         success: function(data) {
+                            console.log(data);
+                            document.getElementById("message1").innerHTML = data.msg[0];
+                            document.getElementById("message2").innerHTML = data.msg[1];
+                            document.getElementById("message3").innerHTML = data.msg[2];
+                            document.getElementById("message4").innerHTML = data.msg[3];
+                            document.getElementById("message5").innerHTML = data.msg[4];
+                            document.getElementById("message6").innerHTML = data.msg[5];
+                            document.getElementById("message7").innerHTML = data.msg[6];
+                            document.getElementById("message8").innerHTML = data.msg[7];
+                            document.getElementById("message9").innerHTML = data.msg[8];
+                            document.getElementById("message10").innerHTML = data.msg[9];
+                         }
+                })
+            }, 1000);
+          })
+        </script>
 
     </body>
 
