@@ -10,6 +10,7 @@ import org.apache.log4j.Level
 import com.datastax.spark.connector._
 import com.datastax.spark.connector.streaming._
 
+
 object StreamExample {
   def main(args: Array[String]) {
 
@@ -30,14 +31,9 @@ object StreamExample {
     val reduced_messages_by_county = messages_by_county.reduceByKey( _ + _ )
     val tup_messages_by_county = reduced_messages_by_county.map( tup => {val state_county = tup._1.split(",")
  								        (state_county(0).tail.dropRight(1), state_county(1).tail.dropRight(1), tup._2)})
-    
-    //val messages_by_state = parsed_message.map( message => (compact(render( message \ "state" )).tail.dropRight(1), 1) )
-    //val tup_messages_by_state = messages_by_state.reduceByKey( _ + _ )
-
 
     tup_messages_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
-    //tup_messages_by_state.saveToCassandra("puppy", "by_state_rt", SomeColumns("state", "count") )
-    
+      
     ssc.start()
     ssc.awaitTermination()
   }
