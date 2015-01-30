@@ -68,6 +68,19 @@ $(function () {
                                             click: function (event) {
                                                 var county_code = event.currentTarget.code
                                                 $.ajax({ type: "GET",
+                                                         url: '/new_messages/' + county_code + "/",
+                                                         success: function(data) {
+                                                            msg_len = data.msg.length
+                                                            for (i = 0; i < 10; i++) {
+                                                                if (i < msg_len) {
+                                                                    document.getElementById("message" + (i+1).toString()).innerHTML = data.msg[i];
+                                                                }else{
+                                                                    document.getElementById("message" + (i+1).toString()).innerHTML = "";
+                                                                }
+                                                            }
+                                                         }
+                                                })
+                                                $.ajax({ type: "GET",
                                                          url: '/update_chart/' + county_code + "/",
                                                          success: function(data) {
                                                             var monthly_meetups = new Highcharts.Chart({
@@ -80,6 +93,7 @@ $(function () {
 
                                                          }
                                                 })
+
                                             }
                                         }
                                      },
@@ -97,7 +111,7 @@ $(function () {
                       {type: 'mapline',
                        name: 'State borders',
                        data: [lines[0]],
-                       color: 'white' },
+                       color: 'black' },
                       {type: 'mapline',
                        name: 'Separator',
                        data: [lines[1]],

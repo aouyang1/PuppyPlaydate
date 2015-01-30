@@ -1,6 +1,6 @@
 __author__ = 'aouyang1'
 
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, json
 from cassandra.cluster import Cluster
 import csv
 import time
@@ -71,11 +71,77 @@ def county_full():
 
     return counties
 
-@app.route('/new_messages/<county>/')
-def update_messages(county):
+@app.route('/new_messages/<county_code>/')
+def update_messages(county_code):
     # query cassandra for top 10 recent messages from a county
     # format into "timestamp user: message"
-    message_list = ["message1","message2","message3","message4","message5","message6","message7","message8","message9","message10"]
+
+    county = code_county_dict[county_code]
+    county_state = [county_attr.strip() for county_attr in county.split(",")]
+
+    county = county_state[0]
+    state = county_state[1]
+
+    messages_rt = session.execute("SELECT * FROM by_county_rt_msgs WHERE state = '" + state + "' AND county = '" + county + "'")
+    stripped_msgs = messages_rt[0].messages.replace("JObject","").replace("JInt","").replace("JString","").replace("JArray","").replace("(","").replace(")","").replace("List","")
+
+    messages = [keyval.strip() for keyval in stripped_msgs.split(",")]
+    messages = map(lambda x: str(x), messages)
+    message_list = []
+    curr_message = ""
+    creatorID_flag = False
+    timestamp_flag = False
+    timestamp_cnt = 0
+    time_str = ""
+    message_flag = False
+    for elem in messages:
+
+        if creatorID_flag:
+            curr_message += elem + ": "
+            creatorID_flag = False
+        elif timestamp_flag:
+            if timestamp_cnt == 0:
+                time_str = elem
+            elif timestamp_cnt <= 2:
+                if len(elem)<2:
+                    elem = "0" + elem
+                time_str += "/" + elem
+            elif timestamp_cnt == 3:
+                if len(elem)<2:
+                    elem = "0" + elem
+                time_str += " " + elem + ":"
+            elif timestamp_cnt == 4:
+                if len(elem)<2:
+                    elem = "0" + elem
+                time_str += elem + ":"
+            elif timestamp_cnt == 5:
+                if len(elem)<2:
+                    elem = "0" + elem
+                time_str += elem
+
+            timestamp_cnt += 1
+            if timestamp_cnt == 6:
+                curr_message = time_str + " " + curr_message
+                timestamp_flag = False
+                timestamp_cnt = 0
+                time_str = ""
+        elif message_flag:
+            curr_message += elem
+            message_list.append(curr_message)
+            curr_message = ""
+            message_flag = False
+
+        if elem == "creatorID":
+            creatorID_flag = True
+        elif elem == "timestamp":
+            timestamp_flag = True
+        elif elem == "message":
+            message_flag = True
+
+
+
+
+    message_list = message_list
     return jsonify(msg=message_list)
 
 @app.route('/update_map/')
