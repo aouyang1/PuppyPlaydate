@@ -1,4 +1,4 @@
-reated by https://www.gitignore.io
+#created by https://www.gitignore.io
 
 ### Scala ###
 *.class
@@ -9,7 +9,8 @@ reated by https://www.gitignore.io
 .history
 .lib/
 dist/*
-target/
+spark/scala_stream/target/
+spark/scala_batch/target/
 lib_managed/
 src_managed/
 project/boot/
