@@ -1,5 +1,8 @@
 #created by https://www.gitignore.io
 
+.idea
+
+
 ### Scala ###
 *.class
 *.log
