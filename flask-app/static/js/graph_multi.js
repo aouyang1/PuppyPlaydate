@@ -71,6 +71,7 @@ $(function () {
                                                          url: '/new_messages/' + county_code + "/",
                                                          success: function(data) {
                                                             msg_len = data.msg.length
+                                                            document.getElementById("news_feed_title").innerHTML = "Current Meetups in " + data.county + ", " + data.state;
                                                             for (i = 0; i < 10; i++) {
                                                                 if (i < msg_len) {
                                                                     document.getElementById("message" + (i+1).toString()).innerHTML = data.msg[i];

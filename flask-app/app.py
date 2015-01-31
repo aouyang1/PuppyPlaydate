@@ -142,7 +142,7 @@ def update_messages(county_code):
 
 
     message_list = message_list
-    return jsonify(msg=message_list)
+    return jsonify(msg=message_list, county=county, state=state)
 
 @app.route('/update_map/')
 def update_map():
