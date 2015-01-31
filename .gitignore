@@ -10,7 +10,13 @@
 .lib/
 dist/*
 spark/scala_stream/target/
+spark/scala_stream/project/project/
+spark/scala_stream/project/target/
+
 spark/scala_batch/target/
+spark/scala_batch/project/project/
+spark/scala_batch/project/target/
+
 lib_managed/
 src_managed/
 project/boot/
