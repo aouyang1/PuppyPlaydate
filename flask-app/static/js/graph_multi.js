@@ -18,7 +18,54 @@ $(function () {
               title: {"text": "Meetups in " + county + ", " + state + " each month"},
               xAxis: {"type": 'datetime', "title": {"text": 'Date'}},
               yAxis: {"title": {"text": '# of Meetups'}, "min": 0},
-              series: [{"name": county + ", " + state, "data": historical_data}]
+              series: [{"name": county + ", " + state, "data": historical_data}],
+              exporting: {
+                 buttons: {
+                    contextButton: {
+                        menuItems: [{text: 'Monthly',
+                                     onclick: function() {
+                                        var chart_series = this.series[0]
+                                        console.log("Monthly chart")
+                                        console.log(chart_series)
+                                        $.ajax({ type: "GET",
+                                                 url: 'update_chart/month/us-tx-121/',
+                                                 success: function(data_sel) {
+                                                    console.log("plotting monthly")
+                                                    chart_series.setData(data_sel.historical_data)
+                                                 }
+                                               })
+                                        }
+                                     },
+                                     {text: 'Daily',
+                                     onclick: function() {
+                                        var chart_series = this.series[0]
+                                        console.log("Daily chart")
+                                        $.ajax({ type: "GET",
+                                                 url: 'update_chart/month/us-tx-121/',
+                                                 success: function(data_sel) {
+                                                    console.log("plotting daily")
+                                                    chart_series.setData(data_sel.historical_data)
+                                                 }
+                                               })
+                                        }
+                                     },
+                                     {text: 'Hourly',
+                                     onclick: function() {
+                                        var chart_series = this.series[0]
+                                        console.log("Hourly chart")
+                                        $.ajax({ type: "GET",
+                                                 url: 'update_chart/month/us-tx-121/',
+                                                 success: function(data_sel) {
+                                                    console.log("plotting hourly")
+                                                    chart_series.setData(data_sel.historical_data)
+                                                 }
+                                               })
+                                        }
+                                     }]
+                        }
+                    }
+                 }
+
   	    });
 
         var county_map = new Highcharts.Map({
@@ -82,14 +129,61 @@ $(function () {
                                                          }
                                                 })
                                                 $.ajax({ type: "GET",
-                                                         url: '/update_chart/' + county_code + "/",
+                                                         url: '/update_chart/month/' + county_code + "/",
                                                          success: function(data) {
                                                             var monthly_meetups = new Highcharts.Chart({
                                                                 chart: {renderTo: 'monthly_meetups', type: 'line'},
                                                                 title: {"text": "Meetups in " + data.county + ", " + data.state + " each month"},
                                                                 xAxis: {"type": 'datetime', "title": {"text": 'Date'}},
                                                                 yAxis: {"title": {"text": '# of Meetups'}, "min": 0},
-                                                                series: [{"name": data.county + ", " + data.state, "data": data.historical_data}]
+                                                                series: [{"name": data.county + ", " + data.state, "data": data.historical_data}],
+                                                                exporting: {
+                                                                 buttons: {
+                                                                    contextButton: {
+                                                                        menuItems: [{text: 'Monthly',
+                                                                                     onclick: function() {
+                                                                                        var chart_series = this.series[0]
+                                                                                        console.log("Monthly chart")
+                                                                                        console.log(chart_series)
+                                                                                        $.ajax({ type: "GET",
+                                                                                                 url: 'update_chart/month/' + county_code + "/",
+                                                                                                 success: function(data_sel) {
+                                                                                                    console.log("plotting monthly")
+                                                                                                    chart_series.setData(data_sel.historical_data)
+                                                                                                 }
+                                                                                               })
+                                                                                        }
+                                                                                     },
+                                                                                     {text: 'Daily',
+                                                                                     onclick: function() {
+                                                                                        var chart_series = this.series[0]
+                                                                                        console.log("Daily chart")
+                                                                                        $.ajax({ type: "GET",
+                                                                                                 url: 'update_chart/day/' + county_code + "/",
+                                                                                                 success: function(data_sel) {
+                                                                                                    console.log("plotting daily")
+                                                                                                    chart_series.setData(data_sel.historical_data)
+                                                                                                 }
+                                                                                               })
+                                                                                        }
+                                                                                     },
+                                                                                     {text: 'Hourly',
+                                                                                     onclick: function() {
+                                                                                        var chart_series = this.series[0]
+                                                                                        console.log("Hourly chart")
+                                                                                        $.ajax({ type: "GET",
+                                                                                                 url: 'update_chart/hour/' + county_code + "/",
+                                                                                                 success: function(data_sel) {
+                                                                                                    console.log("plotting hourly")
+                                                                                                    chart_series.setData(data_sel.historical_data)
+                                                                                                 }
+                                                                                               })
+                                                                                        }
+                                                                                     }]
+                                                                        }
+                                                                    }
+                                                                 }
+
                                                             });
 
                                                          }
