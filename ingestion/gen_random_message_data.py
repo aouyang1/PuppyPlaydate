@@ -39,9 +39,9 @@ for msg_cnt in range(NUM_MESSAGES):
                                              state=state,
                                              rank=0,
                                              timestamp=random_timestamp_arr,
-                                             creatorID=np.random.randint(NUM_USERS),
-                                             senderID=np.random.randint(NUM_USERS),
-                                             messageID=msg_cnt,
+                                             creator_id=np.random.randint(NUM_USERS),
+                                             sender_id=np.random.randint(NUM_USERS),
+                                             message_id=msg_cnt,
                                              message=fake.text())
 
     file_writer.write(message_info + "\n")
