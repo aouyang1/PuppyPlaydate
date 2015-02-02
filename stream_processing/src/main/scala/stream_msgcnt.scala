@@ -30,20 +30,15 @@ object StreamExample {
 
     val parsed_message = kafkaStream.map( x => parse(x._2) ).cache()
     
-    val messag_counts_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), 1) )
+    val message_counts_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), 1) )
     val reduced_message_counts_by_county = message_counts_by_county.reduceByKey( _ + _ )
     val tup_message_counts_by_county = reduced_message_counts_by_county.map( tup => {val state_county = tup._1.split(",")
  								        (state_county(0).tail.dropRight(1), state_county(1).tail.dropRight(1), tup._2)})
-<<<<<<< HEAD
-
-    tup_messages_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
-      
-=======
-    
+   
     tup_message_counts_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
 
 
-    val messages_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), message) )
+    val messages_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), message.toString) )
     val reduced_messages_by_county = messages_by_county.reduceByKey( _ + _ )
     val tup_messages_by_county = reduced_messages_by_county.map( tup => {val state_county = tup._1.split(",")
                                                                         (state_county(0).tail.dropRight(1), state_county(1).tail.dropRight(1), tup._2)})
@@ -51,7 +46,6 @@ object StreamExample {
     tup_messages_by_county.saveToCassandra("puppy", "by_county_rt_msgs", SomeColumns("state", "county", "messages") )
 
 
->>>>>>> c132f50555d3731d204a3a9ae0ff62e990b94d80
     ssc.start()
     ssc.awaitTermination()
   }

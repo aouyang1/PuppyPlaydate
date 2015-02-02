@@ -8,7 +8,7 @@ import IngestionUtilities as IngUt
 from faker import Factory
 
 fake = Factory.create()
-NUM_MESSAGES = 10000000
+NUM_MESSAGES = 375000
 NUM_USERS = 1000000
 hadoop_remote_path = "/user/PuppyPlaydate/history/"
 
@@ -20,35 +20,36 @@ start_ts = time.mktime(start_dtt)
 end_ts = time.mktime(end_dtt)
 
 
+for rep in range(100):
+    msg_data = []
+    local_filename = "messages_{}.txt".format(datetime.now().strftime('%y-%m-%d_%H-%M-%S'))
 
-msg_data = []
-local_filename = "random_messages.txt"
-file_writer = open(local_filename, 'w')
+    file_writer = open(local_filename, 'w')
 
-for msg_cnt in range(NUM_MESSAGES):
+    for msg_cnt in range(NUM_MESSAGES):
 
-    # print progress to console
-    if msg_cnt % 100000 == 0:
-        print "{}".format(msg_cnt/float(NUM_MESSAGES))
+        # print progress to console
+        if msg_cnt % 100000 == 0:
+            print "rep: {} is {} complete".format(rep, msg_cnt/float(NUM_MESSAGES))
 
-    county, state = IngUt.select_random_county(county_state_list)
+        county, state = IngUt.select_random_county(county_state_list)
 
-    random_timestamp_arr = IngUt.gen_random_date_between(start_date=start_ts, end_date=end_ts)
+        random_timestamp_arr = IngUt.gen_random_date_between(start_date=start_ts, end_date=end_ts)
 
-    message_info = IngUt.create_json_message(county=county,
-                                             state=state,
-                                             rank=0,
-                                             timestamp=random_timestamp_arr,
-                                             creator_id=np.random.randint(NUM_USERS),
-                                             sender_id=np.random.randint(NUM_USERS),
-                                             message_id=msg_cnt,
-                                             message=fake.text())
+        message_info = IngUt.create_json_message(county=county,
+                                                 state=state,
+                                                 rank=0,
+                                                 timestamp=random_timestamp_arr,
+                                                 creator_id=np.random.randint(NUM_USERS),
+                                                 sender_id=np.random.randint(NUM_USERS),
+                                                 message_id=msg_cnt,
+                                                 message=fake.text())
 
-    file_writer.write(message_info + "\n")
+        file_writer.write(message_info + "\n")
 
-file_writer.close()
-os.system("sudo -u hdfs hdfs dfs -put {local} {remote}{local}"
-          .format(local=local_filename, remote=hadoop_remote_path))
+    file_writer.close()
+    os.system("sudo -u hdfs hdfs dfs -put {local} {remote}{local}"
+              .format(local=local_filename, remote=hadoop_remote_path))
 
 
 

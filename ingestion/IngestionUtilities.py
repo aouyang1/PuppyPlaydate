@@ -7,21 +7,24 @@ from datetime import datetime
 
 def parse_county_list(filename):
     cnt = 0
+    pop_cnt = 0
     county_state_list = []
     with open(filename) as f:
         for line in f:
             if 6 <= cnt <= 45085:
-                county_state = line.split('|')[3]
+		segmented_line = line.split('|')
+                county_state = segmented_line[3]
+		population = max(int(segmented_line[5].strip().replace(',',''))/1000,1)		
 
                 parsed_county_state = [county_state_row.strip() for county_state_row in county_state.split(',')]
                 if len(parsed_county_state) == 1:
                     parsed_county_state = parsed_county_state.append("DC")
 
                 if parsed_county_state:
-                    county_state_list.append(parsed_county_state)
+                    county_state_list += [parsed_county_state]*population
 
             cnt += 1
-
+    
     return county_state_list
 
 

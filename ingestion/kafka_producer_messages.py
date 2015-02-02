@@ -50,8 +50,11 @@ class Producer(object):
 if __name__ == "__main__":
     prod = Producer("localhost:9092")
     args = sys.argv
-    if len(args) != 2:
+    print args[1]
+    if len(args) == 1:
         sleep_time = 0.0
+    elif args[1]=="+":
+	sleep_time = 0.0
     else:
         sleep_time = float(args[1])
 
