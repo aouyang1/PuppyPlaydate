@@ -19,7 +19,7 @@ object incremental_batch_msgcnt {
     val jsonRDD = sc.textFile(args(0))
  
     // parse each record as a json
-    val parsedRDD = jsonRDD.map( x => parse(x) ).cache()
+    val parsedRDD = jsonRDD.map( x => parse(x) )
   
      
     //-------- MAP TO KEY, VALUE --------//
