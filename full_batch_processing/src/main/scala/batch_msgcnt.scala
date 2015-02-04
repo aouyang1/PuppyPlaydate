@@ -9,16 +9,16 @@ import scala.collection.JavaConversions._
 
 
 object batch_msgcnt {
-  def main(args: String) {
+  def main(args: Array[String]) {
 
     def single_to_double(digit: String): String = if (digit.length==1) "0"+digit else digit
 
     val conf = new SparkConf().setAppName("CountMessageByCounty").set("spark.cassandra.connection.host", "54.215.184.69")
     val sc = new SparkContext(conf)
 
-    val jsonRDD = sc.textFile(args)
- 
-   // parse each record as a json
+    val jsonRDD = sc.textFile("/user/PuppyPlaydate/history/*")
+
+    // parse each record as a json
     val parsedRDD = jsonRDD.map( x => parse(x) ).cache()
   
      

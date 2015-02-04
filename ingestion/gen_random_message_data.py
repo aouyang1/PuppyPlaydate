@@ -20,7 +20,7 @@ start_ts = time.mktime(start_dtt)
 end_ts = time.mktime(end_dtt)
 
 
-for rep in range(100):
+for rep in range(75):
     msg_data = []
     local_filename = "messages_{}.txt".format(datetime.now().strftime('%y-%m-%d_%H-%M-%S'))
 
