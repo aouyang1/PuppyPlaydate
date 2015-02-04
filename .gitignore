@@ -1,7 +1,7 @@
 #created by https://www.gitignore.io
 
 .idea
-
+ingestion/kafka_messages/
 
 ### Scala ###
 *.class
@@ -12,13 +12,17 @@
 .history
 .lib/
 dist/*
-spark/scala_stream/target/
-spark/scala_stream/project/project/
-spark/scala_stream/project/target/
+stream_processing/target/
+stream_processing/project/project/
+stream_processing/project/target/
 
-spark/scala_batch/target/
-spark/scala_batch/project/project/
-spark/scala_batch/project/target/
+full_batch_processing/target/
+full_batch_processing/project/project/
+full_batch_processing/project/target/
+
+incr_batch_processing/target/
+incr_batch_processing/project/project/
+incr_batch_processing/project/target/
 
 lib_managed/
 src_managed/
