@@ -20,7 +20,7 @@ object StreamExample {
        
     ssc.checkpoint("/user/PuppyPlaydate/spark_streaming")
 
-    val zkQuorum = "localhost:2181"
+    val zkQuorum = "54.67.43.21:2181"
     val groupID = "rt"
     val topics = Map("messages" -> 1)
     val kafkaStream = KafkaUtils.createStream(ssc, zkQuorum, groupID, topics)
@@ -38,15 +38,15 @@ object StreamExample {
     tup_message_counts_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
 
 
-    val messages_by_county = parsed_message.map( message => {val date_array = compact(x \ "timestamp").tail.dropRight(1).split(",")
+    val messages_by_county = parsed_message.map( message => {val date_array = compact(message \ "timestamp").tail.dropRight(1).split(",")
 							    (compact(render( message \ "state" )), 
 							     compact(render( message \ "county" )), 
-							     date_array(0) + single_to_double(date_array(1)) + single_to_double(date_array(2)) + single_to_double(date_array(3)) + single_to_double(date_array(4)) + single_to_double(date_array(5)),
-							     compact(render( message \ "creatorID" )),
-							     compact(render( message \ "message" )) )}
+							    (date_array(0) + single_to_double(date_array(1)) + single_to_double(date_array(2)) + single_to_double(date_array(3)) + single_to_double(date_array(4)) + single_to_double(date_array(5))).toInt,
+							     compact(render( message \ "creatorID" )).toInt,
+							     message.toString )}
 					       )
     
-    messages_by_county.saveToCassandra("puppy", "by_county_rt_msgs", SomeColumns("state", "county", "date", "messages") )
+    messages_by_county.saveToCassandra("puppy", "by_couny_msgs", SomeColumns("state", "county", "date", "message") )
 
 
     ssc.start()
