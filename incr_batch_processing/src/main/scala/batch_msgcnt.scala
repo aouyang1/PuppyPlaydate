@@ -22,7 +22,7 @@ object incremental_batch_msgcnt {
     val parsedRDD = jsonRDD.map( x => parse(x) )
   
      
-    //-------- MAP TO KEY, VALUE --------//
+    // MAP TO KEY, VALUE
 
     // historical count by county and month
     //            ("state,county,year,month", 1)   
@@ -46,7 +46,7 @@ object incremental_batch_msgcnt {
        
    
     
-    //-------- REDUCE AND SAVE TO CASSANDRA --------//
+    // REDUCE AND SAVE TO CASSANDRA
 
     // reduce and map county_month to tuple for cassandra
     val county_month_cnt = mapped_county_month.reduceByKey(_+_)

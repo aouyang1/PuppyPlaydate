@@ -38,12 +38,15 @@ object StreamExample {
     tup_message_counts_by_county.saveToCassandra("puppy", "by_county_rt", SomeColumns("state", "county", "count") )
 
 
-    val messages_by_county = parsed_message.map( message => (compact(render( message \ "state" )) + "," + compact(render( message \ "county" )), message.toString) )
-    val reduced_messages_by_county = messages_by_county.reduceByKey( _ + _ )
-    val tup_messages_by_county = reduced_messages_by_county.map( tup => {val state_county = tup._1.split(",")
-                                                                        (state_county(0).tail.dropRight(1), state_county(1).tail.dropRight(1), tup._2)})
+    val messages_by_county = parsed_message.map( message => {val date_array = compact(x \ "timestamp").tail.dropRight(1).split(",")
+							    (compact(render( message \ "state" )), 
+							     compact(render( message \ "county" )), 
+							     date_array(0) + single_to_double(date_array(1)) + single_to_double(date_array(2)) + single_to_double(date_array(3)) + single_to_double(date_array(4)) + single_to_double(date_array(5)),
+							     compact(render( message \ "creatorID" )),
+							     compact(render( message \ "message" )) )}
+					       )
     
-    tup_messages_by_county.saveToCassandra("puppy", "by_county_rt_msgs", SomeColumns("state", "county", "messages") )
+    messages_by_county.saveToCassandra("puppy", "by_county_rt_msgs", SomeColumns("state", "county", "date", "messages") )
 
 
     ssc.start()
