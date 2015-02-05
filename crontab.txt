@@ -1,1 +1,1 @@
-30 10 * * * incr_batch_start.sh
+59 7 * * * /home/ubuntu/PuppyPlaydate/incr_batch_start.sh
