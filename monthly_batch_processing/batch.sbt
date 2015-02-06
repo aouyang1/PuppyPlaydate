@@ -1,4 +1,4 @@
-name := "CountMessageByCounty"
+name := "monthly_batch"
 
 version := "1.0"
 
