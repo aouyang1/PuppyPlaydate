@@ -39,14 +39,15 @@ object StreamExample {
 
 
     val messages_by_county = parsed_message.map( message => {val date_array = compact(message \ "timestamp").tail.dropRight(1).split(",")
-							    (compact(render( message \ "state" )), 
-							     compact(render( message \ "county" )), 
-							    (date_array(0) + single_to_double(date_array(1)) + single_to_double(date_array(2)) + single_to_double(date_array(3)) + single_to_double(date_array(4)) + single_to_double(date_array(5))).toInt,
-							     compact(render( message \ "creatorID" )).toInt,
+							    (compact(render( message \ "state" )).tail.dropRight(1), 
+							     compact(render( message \ "county" )).tail.dropRight(1), 
+							    (date_array(0) + single_to_double(date_array(1)) + single_to_double(date_array(2))).toInt,
+							    (single_to_double(date_array(3)) + single_to_double(date_array(4)) + single_to_double(date_array(5))).toInt,
+							     compact(render( message \ "messageID" )).toInt,
 							     message.toString )}
 					       )
     
-    messages_by_county.saveToCassandra("puppy", "by_couny_msgs", SomeColumns("state", "county", "date", "message") )
+    messages_by_county.saveToCassandra("puppy", "by_couny_msgs", SomeColumns("state", "county", "date", "time", "messageid", "message") )
 
 
     ssc.start()
