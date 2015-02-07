@@ -1,9 +1,10 @@
 __author__ = 'aouyang1'
 
 import json
-import numpy as np
 import random
-from datetime import datetime
+import datetime 
+from calendar import monthrange
+
 
 def parse_county_list(filename):
     cnt = 0
@@ -29,17 +30,55 @@ def parse_county_list(filename):
 
 
 def select_random_county(county_state_list):
-    county_random_index = np.random.randint(len(county_state_list))
-    county = county_state_list[county_random_index][0]
-    state = county_state_list[county_random_index][1]
+    county = random.choice(county_state_list)[0]
+    state = random.choice(county_state_list)[1]
 
     return county, state
 
 
 def gen_random_date_between(start_date, end_date):
     random_timestamp = random.random()*(end_date - start_date) + start_date
-    random_timestamp_tup = datetime.fromtimestamp(random_timestamp).timetuple()
+    random_timestamp_tup = datetime.datetime.fromtimestamp(random_timestamp).timetuple()
     random_timestamp_arr = list(random_timestamp_tup[0:6])
+    return random_timestamp_arr
+
+
+def gen_modelled_date():
+
+              # 2012, 2013, 2014
+    year_model = [1,    2,    4]
+    year_model = reduce(lambda x, y: x+y, [[year]*freq for year, freq in zip(range(2012,2015), year_model)])
+    rand_year = random.choice(year_model)
+
+
+                 # J  F  M  A  M  J  J  A  S  O   N   D
+    month_model = [1, 4, 8, 9, 7, 5, 4, 6, 8, 12, 10, 6]
+    month_model = reduce(lambda x, y: x+y, [[month]*freq for month, freq in zip(range(1,13), month_model)])
+    rand_month = random.choice(month_model)
+
+    week_dict = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []} 	
+    num_days_in_month = monthrange(rand_year, rand_month)[1]
+
+    for day in range(1, num_days_in_month+1):
+        week_dict[datetime.date(rand_year, rand_month, day).weekday()] += [day]   
+ 
+
+                # M  T  W  R  F  S  S
+    week_model = [2, 1, 1, 2, 4, 8, 3]
+    week_model = reduce(lambda x, y: x+y, [[week]*freq for week, freq in zip(range(7), week_model)])
+    rand_day = random.choice(week_dict[random.choice(week_model)])
+
+
+                # 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23
+    hour_model = [1, 1, 1, 1, 1, 1, 2, 9, 7, 5, 2,  1,  1,  2,  2,  3,  4,  14, 10, 8,  6,  3,  1,  1]
+    hour_model = reduce(lambda x, y: x+y, [[hour]*freq for hour, freq in zip(range(24), hour_model)])
+    rand_hour = random.choice(hour_model)
+ 
+    rand_minute = random.choice(range(60))
+
+    rand_second = random.choice(range(60))
+    
+    random_timestamp_arr = [rand_year, rand_month, rand_day, rand_hour, rand_minute, rand_second]
     return random_timestamp_arr
 
 
