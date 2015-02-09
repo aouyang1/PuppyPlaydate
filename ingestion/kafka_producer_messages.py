@@ -14,14 +14,33 @@ NUM_USERS = 1000000
 
 
 class Producer(object):
+    """Kafka producer class with functions to send messages.
 
+    Messages are sent to a single kafka topic "messages" as a json formatted
+    string
+
+    Attributes:
+        client: string representing IP:port of the kafka broker
+        producer: Producer object using the previously specified kafka client
+        county_state_list: a list of lists containing the counties and their
+            associated state abbreviation
+    """
     def __init__(self, addr):
+        """Initialize Producer with address of the kafka broker ip address."""
         self.client = KafkaClient(addr)
         self.producer = SimpleProducer(self.client)
         self.county_state_list = IngUt.parse_county_list('ingestion/county_list.txt')
 
     def sim_msg_stream(self, sleep_time=0.25):
+        """Sends a stream of messages to the Kafka topic "messages".
 
+        Args:
+            sleep_time: float number in seconds representing the rate messages
+                should be sent to the Kafka topic
+
+        Returns:
+            None
+        """
         msg_cnt = 0
 
         while True:
