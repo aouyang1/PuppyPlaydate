@@ -15,7 +15,7 @@ def parse_county_list(filename):
 
     with open(filename) as f:
         for line in f:
-	    
+
             if 6 <= line_count <= 45085:
                 segmented_line = line.split('|')
 
