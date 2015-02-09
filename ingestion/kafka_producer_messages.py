@@ -25,6 +25,7 @@ class Producer(object):
         msg_cnt = 0
 
         while True:
+            print len(self.county_state_list)
             county, state = IngUt.select_random_county(self.county_state_list)
 
             timestamp = list(time.localtime()[0:6])

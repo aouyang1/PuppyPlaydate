@@ -15,6 +15,7 @@ def parse_county_list(filename):
 
     with open(filename) as f:
         for line in f:
+	    
             if 6 <= line_count <= 45085:
                 segmented_line = line.split('|')
 
@@ -24,15 +25,16 @@ def parse_county_list(filename):
                 county_state = [row.strip() for row in county.split(',')]
 
                 # checks for District of Columbia with no state
-                if len(county_state) == 1:
-                    county_state = county_state.append("DC")
+                if not county_state or len(county_state) == 1:
+                    county_state = [county.strip(), "DC"]
 
                 # extract labor force field
                 population = int(segmented_line[5].strip().replace(',', ''))
                 population_downsized = max(population/DOWNSAMPLE, 1)
+
                 county_state_list += [county_state]*population_downsized
 
-                line_count += 1
+            line_count += 1
     
     return county_state_list
 
@@ -40,7 +42,10 @@ def parse_county_list(filename):
 def select_random_county(county_state_list):
     county_state = random.choice(county_state_list)
     county = county_state[0]
-    state = county_state[1]
+    try:
+        state = county_state[1]
+    except:
+        print county_state
 
     return county, state
 
