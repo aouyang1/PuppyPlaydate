@@ -24,7 +24,7 @@ Puppy Playdate uses synthetically generated JSON messages which are processed in
 
 ## Data Synethesis
 Current list of counties in the United States were extracted from http://www.bls.gov/lau/laucntycur14.txt. Area Title contained both the county name and state. The Civilian Labor Force field was used to scale the frequency messages would be sent to each county where higher labor force related to a higher frequency of messages to be sent. Time based trends were also implemented by altering the probability of a message being sent a specific year, month and day of week. Synthesized trends are as follows:
-- 2x growth in messages by each year 2012, 2013, 2014
+- Increasing growth in messages by each year 2012, 2013, 2014
 - More messages sent in April and October with October being the peak activity
 - Weekly patterns with peak activity on Saturdays
 
