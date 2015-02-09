@@ -2,8 +2,10 @@ __author__ = 'aouyang1'
 
 import json
 import random
+import os
 import datetime 
 from calendar import monthrange
+from faker import Factory
 
 
 DOWNSAMPLE = 1000   # amount of downsampling needed on the Civilian Labor Force
@@ -79,7 +81,7 @@ def select_random_county(county_state_list):
     return county, state
 
 
-def gen_random_date_between(start_date, end_date):
+def gen_random_date(start_date, end_date):
     """Generates a random date between a specified start and end date. Dates
         are uniformly distributed across the time range.
 
@@ -102,7 +104,7 @@ def gen_random_date_between(start_date, end_date):
     return random_timestamp_arr
 
 
-def gen_modelled_date():
+def gen_modelled_date(start_date, end_date):
     """Generates a random date between 2012 and 2015 using the designated
         model as follows. Each year after 2012 will have a higher likelihood
         of being selected. Two peak months in April and October with October
@@ -112,7 +114,8 @@ def gen_modelled_date():
     dynamic models
 
     Args:
-        None
+        start_date: (not implemented yet)
+        end_date: (not implemented yet)
 
     Returns:
         A list representing the randomly generated date
@@ -238,3 +241,40 @@ def create_json_user(name, county, state, user_id):
     return json.dumps(message_info)
 
 
+def gen_random_messages(county_state_list, start_date, end_date, reps=1000,
+                        num_messages=375000, num_users=1000000,
+                        hadoop_remote_path="/user/PuppyPlaydate/history/",
+                        date_model=gen_modelled_date):
+
+    fake = Factory.create()
+
+    for rep in range(reps):
+
+        msg_timestamp = datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+        local_filename = "messages_{}.txt".format(msg_timestamp)
+
+        file_writer = open(local_filename, 'w')
+
+        for msg_cnt in range(num_messages):
+
+            # print progress to console
+            if msg_cnt % 100000 == 0:
+                print "rep: {} is {} complete".format(rep, msg_cnt/float(num_messages))
+
+            county, state = select_random_county(county_state_list)
+
+            random_timestamp_arr = date_model(start_date, end_date)
+
+            message_info = create_json_message(county=county, state=state,
+                                               rank=0,
+                                               timestamp=random_timestamp_arr,
+                                               creator_id=random.choice(range(num_users)),
+                                               sender_id=random.choice(range(num_users)),
+                                               message_id=msg_cnt,
+                                               message=fake.text())
+
+            file_writer.write(message_info + "\n")
+
+        file_writer.close()
+        os.system("sudo -u hdfs hdfs dfs -put {local} {remote}{local}"
+                  .format(local=local_filename, remote=hadoop_remote_path))
