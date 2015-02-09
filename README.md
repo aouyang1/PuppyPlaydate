@@ -37,8 +37,11 @@ JSON message fields:
 - messageID: Integer representing a specific message thread
 - message: String containing the message
 
+~ 45 GB of historical data
+~ 1000 messages streaming per second
+
 ## Data Ingestion
-JSON messages were produced and consumed by python scripts using the kafka-python package from https://github.com/mumrah/kafka-python.git. Messages were published to a single topic with Spark Streaming and HDFS acting as consumers. 
+JSON messages were produced and consumed by python scripts using the kafka-python package from https://github.com/mumrah/kafka-python.git. Messages were published to a single topic with Spark Streaming and HDFS acting as consumers. Messages were blocked into 20MB sizes into the main historical folder and cached folder on HDFS. The incremental batch job operates continually on the cached folder and removes processed files while leaving the historical folder immutable for a complete rebuild of the batch view.
 
 ## Batch Processing
 Two batch processes were performed for historical batch views:
@@ -51,6 +54,8 @@ Batch views were directly written into cassandra with the spark-cassandra connec
 sbt libarary dependencies:
 - "com.datastax.spark" %% "spark-cassandra-connector" % "1.2.0-alpha1"
 - "org.apache.spark" %% "spark-core" % "1.2.0" % "provided"
+
+A full batch process was made in the case of needing to rebuild the entire batch view. Typically the incremental batch process is run daily from the cached folder on HDFS. 
 
 ## Real-time Processing
 Two stream processes were performed for real-time views:
@@ -99,3 +104,9 @@ Data in JSON format can be displayed in the browser by calling the following fro
   - return a time series requested by the time interval and county_code
   - interval options: month or day
   - example: puppyplaydate.website/month/us-ca-081/
+
+## Startup Protocol
+1. Kafka server
+2. Spark Streaming
+3. HDFS Kafka consumer
+4. Kafka message producer
