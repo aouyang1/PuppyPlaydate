@@ -9,9 +9,10 @@ class Consumer(object):
 
     def __init__(self, addr, group, topic):
         self.client = KafkaClient(addr)
-        self.consumer = SimpleConsumer(self.client, group, topic, max_buffer_size=1310720000)
-        self.tempfile_path = None
-        self.tempfile = None
+        self.consumer = SimpleConsumer(self.client, group, topic,
+                                       max_buffer_size=1310720000)
+        self.temp_file_path = None
+        self.temp_file = None
         self.topic = topic
         self.group = group
         self.block_cnt = 0
@@ -22,32 +23,35 @@ class Consumer(object):
         timestamp = time.strftime('%Y%m%d%H%M%S')
         
         #open file for writing
-        self.tempfile_path = "/home/ubuntu/PuppyPlaydate/ingestion/kafka_messages/kafka_%s_%s_%s.dat" % (self.topic, self.group, timestamp)
-        self.tempfile = open(self.tempfile_path,"w")
+        self.temp_file_path = "/home/ubuntu/PuppyPlaydate/ingestion/kafka_messages/kafka_%s_%s_%s.dat" % (self.topic, self.group, timestamp)
+        self.temp_file = open(self.temp_file_path,"w")
         log_has_at_least_one = False #did we log at least one entry?
-        block_cnt = 0
+
         while True:
-	    try:
-                messages = self.consumer.get_messages(count=1000, block=False) #get 1000 messages at a time, non blocking
-            
-                for message in messages: #OffsetAndMessage(offset=43, message=Message(magic=0, attributes=0, key=None, value='some message'))
+            try:
+                #get 1000 messages at a time, non blocking
+                messages = self.consumer.get_messages(count=1000, block=False)
+
+                #OffsetAndMessage(offset=43, message=Message(magic=0,
+                # attributes=0, key=None, value='some message'))
+                for message in messages:
                     log_has_at_least_one = True
                     self.tempfile.write(message.message.value + "\n")
-           
-                if self.tempfile.tell() > 20000000: #file size > 20MB
+
+                #file size > 20MB
+                if self.tempfile.tell() > 20000000:
                     self.flush_to_hdfs(output_dir)
-            
+
                 self.consumer.commit()
             except:
-                self.consumer.seek(0,2)
-               
+                self.consumer.seek(0, 2)
 
-        #exit loop
+        # exit loop
         if log_has_at_least_one:
             self.flush_to_hdfs(output_dir, self.topic)
-            
-        self.consumer.commit() #save position in the kafka queue
 
+        #save position in the kafka queue
+        self.consumer.commit()
 
     def flush_to_hdfs(self, output_dir):
         self.tempfile.close()
@@ -59,16 +63,17 @@ class Consumer(object):
         print "Block " + str(self.block_cnt) + ": Flushing 20MB file to HDFS => " + hadoop_path
         self.block_cnt += 1
 
-        os.system("sudo -u hdfs hdfs dfs -put %s %s" % (self.tempfile_path, hadoop_path))
-        os.system("sudo -u hdfs hdfs dfs -put %s %s" % (self.tempfile_path, cached_path))
-
-
-        os.remove(self.tempfile_path)
+        # place blocked messages into history and cached folders on hdfs
+        os.system("sudo -u hdfs hdfs dfs -put %s %s" % (self.temp_file_path,
+                                                        hadoop_path))
+        os.system("sudo -u hdfs hdfs dfs -put %s %s" % (self.temp_file_path,
+                                                        cached_path))
+        os.remove(self.temp_file_path)
 
         timestamp = time.strftime('%Y%m%d%H%M%S')
 
-        self.tempfile_path = "/home/ubuntu/PuppyPlaydate/ingestion/kafka_messages/kafka_%s_%s_%s.dat" % (self.topic, self.group, timestamp)
-        self.tempfile = open(self.tempfile_path, "w")
+        self.temp_file_path = "/home/ubuntu/PuppyPlaydate/ingestion/kafka_messages/kafka_%s_%s_%s.dat" % (self.topic, self.group, timestamp)
+        self.temp_file = open(self.temp_file_path, "w")
 
 
 if __name__ == '__main__':

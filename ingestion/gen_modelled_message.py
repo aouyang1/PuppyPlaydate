@@ -1,6 +1,5 @@
 __author__ = 'aouyang1'
 
-import time
 import numpy as np
 import os
 from datetime import datetime
@@ -10,14 +9,15 @@ from faker import Factory
 fake = Factory.create()
 NUM_MESSAGES = 375000
 NUM_USERS = 1000000
+NUM_REPLICATIONS = 200
 hadoop_remote_path = "/user/PuppyPlaydate/history/"
 
 county_state_list = IngUt.parse_county_list("county_list.txt")
 
+for rep in range(NUM_REPLICATIONS):
 
-for rep in range(200):
-    msg_data = []
-    local_filename = "messages_{}.txt".format(datetime.now().strftime('%y-%m-%d_%H-%M-%S'))
+    msg_timestamp = datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+    local_filename = "messages_{}.txt".format(msg_timestamp)
 
     file_writer = open(local_filename, 'w')
 
