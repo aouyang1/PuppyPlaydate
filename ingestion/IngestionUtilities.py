@@ -25,13 +25,14 @@ def parse_county_list(filename):
                     county_state_list += [parsed_county_state]*population
 
             cnt += 1
-    
+    print county_state_list    
     return county_state_list
 
 
 def select_random_county(county_state_list):
-    county = random.choice(county_state_list)[0]
-    state = random.choice(county_state_list)[1]
+    county_state = random.choice(county_state_list)
+    county = county_state[0]
+    state = county_state[1]
 
     return county, state
 
