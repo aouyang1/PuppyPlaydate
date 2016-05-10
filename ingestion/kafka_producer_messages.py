@@ -1,12 +1,13 @@
 __author__ = 'aouyang1'
 
+import os
+import json
 import time
 import random
 import IngestionUtilities as IngUt
 import sys
 
-from kafka.client import KafkaClient
-from kafka.producer import SimpleProducer
+from kafka import KafkaProducer
 from faker import Factory
 
 fake = Factory.create()
@@ -27,8 +28,7 @@ class Producer(object):
     """
     def __init__(self, addr):
         """Initialize Producer with address of the kafka broker ip address."""
-        self.client = KafkaClient(addr)
-        self.producer = SimpleProducer(self.client)
+        self.producer = KafkaProducer(bootstrap_servers=addr, value_serializer=lambda v: json.dumps(v).encode('utf-8'))
         self.county_state_list = IngUt.parse_county_list('ingestion/county_list.txt')
 
     def sim_msg_stream(self, sleep_time=0.25):
@@ -48,17 +48,16 @@ class Producer(object):
             county, state = IngUt.select_random_county(self.county_state_list)
 
             timestamp = list(time.localtime()[0:6])
+	    message_info = {"county": county,
+			    "state": state,
+			    "rank": 0,
+			    "timestamp": timestamp,
+			    "creatorID": random.randint(0, NUM_USERS-1),
+			    "sender_id": random.randint(0, NUM_USERS-1),
+			    "message": fake.text()}
 
-            message_info = IngUt.create_json_message(county=county,
-                                                     state=state,
-                                                     rank=0,
-                                                     timestamp=timestamp,
-                                                     creator_id=random.randint(0, NUM_USERS-1),
-                                                     sender_id=random.randint(0, NUM_USERS-1),
-                                                     message_id=msg_cnt,
-                                                     message=fake.text())
 
-            self.producer.send_messages('messages', message_info)
+            self.producer.send('messages', message_info)
             print timestamp
 
             if sleep_time != 0:
@@ -68,7 +67,9 @@ class Producer(object):
 
             
 if __name__ == "__main__":
-    prod = Producer("localhost:9092")
+    kafka_url = "{}:9092".format(os.environ["KAFKA_BROKER_URL"]) 
+    print(kafka_url)
+    prod = Producer(kafka_url)
     args = sys.argv
     print args[1]
     if len(args) == 1:
