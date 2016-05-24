@@ -83,8 +83,8 @@ Tables:
 CREATE KEYSPACE puppy WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
 CREATE TABLE puppy.by_county_rt (state varchar, county varchar, count int, PRIMARY KEY ( (state, county) ) );
 CREATE TABLE puppy.by_county_msgs (state varchar, county varchar, date int, time int, message varchar, PRIMARY KEY ( (state, county), date, time ) );
-CREATE TABLE puppy.by_county_month (state varchar, county varchar, date int, count, int, PRIMARY KEY ( (state, county), date ) );
-CREATE TABLE puppy.by_county_day (state varchar, county varchar, date int, count, int, PRIMARY KEY ( (state, county), date ) );
+CREATE TABLE puppy.by_county_month (state varchar, county varchar, date int, count int, PRIMARY KEY ( (state, county), date ) );
+CREATE TABLE puppy.by_county_day (state varchar, county varchar, date int, count int, PRIMARY KEY ( (state, county), date ) );
 ```
 Date/Time format: 
 - by_county_msgs: 
