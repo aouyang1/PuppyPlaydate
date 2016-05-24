@@ -80,10 +80,11 @@ Tables:
 3. by_county_month: table populated by Spark (batch) containing the historical message counts on a monthly basis
 4. by_county_day: table populated by Spark (batch) containing the historical message counts on a daily basis
 ```
-CREATE TABLE by_county_rt (state varchar, county varchar, count int, PRIMARY KEY ( (state, county) ) );
-CREATE TABLE by_county_msgs (state varchar, county varchar, date int, time int, message varchar, PRIMARY KEY ( (state, county), date, time ) );
-CREATE TABLE by_county_month (state varchar, county varchar, date int, count, int, PRIMARY KEY ( (state, county), date ) );
-CREATE TABLE by_county_day (state varchar, county varchar, date int, count, int, PRIMARY KEY ( (state, county), date ) );
+CREATE KEYSPACE puppy WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
+CREATE TABLE puppy.by_county_rt (state varchar, county varchar, count int, PRIMARY KEY ( (state, county) ) );
+CREATE TABLE puppy.by_county_msgs (state varchar, county varchar, date int, time int, message varchar, PRIMARY KEY ( (state, county), date, time ) );
+CREATE TABLE puppy.by_county_month (state varchar, county varchar, date int, count, int, PRIMARY KEY ( (state, county), date ) );
+CREATE TABLE puppy.by_county_day (state varchar, county varchar, date int, count, int, PRIMARY KEY ( (state, county), date ) );
 ```
 Date/Time format: 
 - by_county_msgs: 
