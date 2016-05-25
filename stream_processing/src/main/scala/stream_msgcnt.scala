@@ -19,10 +19,10 @@ object StreamExample {
   def main(args: Array[String]) {
 
     val conf = new SparkConf().setAppName("stream_example")
-	.set("spark.cassandra.connection.host", "ec2-52-24-202-29.us-west-2.compute.amazonaws.com")
+	.set("spark.cassandra.connection.host", "ec2-52-40-72-148.us-west-2.compute.amazonaws.com")
     val ssc = new StreamingContext(conf, Seconds(5))
        
-    val zkQuorum = "52.39.138.152:2181,52.36.139.122:2181,52.34.29.103:2181"
+    val zkQuorum = "52.40.101.137:2181,52.33.215.84:2181,52.40.120.50:2181"
     val groupID = "rt"
     val topics = Map("messages" -> 100)
 
@@ -38,6 +38,7 @@ object StreamExample {
         sqlContext.sql("SELECT state, county, CAST(COUNT(message) as INT) as count FROM msgs GROUP BY state, county")
             .map{ case Row(state: String, county: String, count: Int) => MessageByCounty(state, county, count) }
             .saveToCassandra("puppy","by_county_rt")
+
     }
 
     ssc.start()
