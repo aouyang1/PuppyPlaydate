@@ -5,6 +5,6 @@ num_instances: 3
 key_name: insight-cluster
 security_group_ids: sg-9206aaf7
 instance_type: m4.xlarge
-tag_name: cassandra-ao
+tag_name: ao-cassie
 vol_size: 500
 role: worker

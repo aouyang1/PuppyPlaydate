@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_NAME=kafka-ao
+CLUSTER_NAME=ao-kafka
 
 peg up kafka.yml &
 
@@ -10,3 +10,4 @@ peg fetch ${CLUSTER_NAME}
 
 peg install ${CLUSTER_NAME} zookeeper
 peg install ${CLUSTER_NAME} kafka
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_NAME=cassandra-ao
+CLUSTER_NAME=ao-cassie
 
 peg up cassandra.yml &
 
@@ -11,3 +11,4 @@ peg fetch ${CLUSTER_NAME}
 peg install ${CLUSTER_NAME} ssh
 peg install ${CLUSTER_NAME} cassandra
 peg install ${CLUSTER_NAME} opscenter
+

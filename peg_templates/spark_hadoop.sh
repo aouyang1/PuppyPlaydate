@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_NAME=spark-ao
+CLUSTER_NAME=ao-spark
 
 peg up spark_master.yml &
 peg up spark_workers.yml &

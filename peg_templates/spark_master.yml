@@ -1,9 +1,10 @@
-purchase_type: on_demand
+purchase_type: spot
+price: 0.25
 subnet_id: subnet-3a78835f
 num_instances: 1
 key_name: insight-cluster
 security_group_ids: sg-9206aaf7
-instance_type: c4.2xlarge
-tag_name: spark-ao
+instance_type: m4.xlarge
+tag_name: ao-spark
 vol_size: 500
 role: master
