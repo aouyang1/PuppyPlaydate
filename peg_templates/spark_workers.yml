@@ -8,3 +8,4 @@ instance_type: m4.xlarge
 tag_name: ao-spark
 vol_size: 500
 role: worker
+use_eips: true
