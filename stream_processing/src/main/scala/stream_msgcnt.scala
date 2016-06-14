@@ -19,14 +19,14 @@ object StreamExample {
   def main(args: Array[String]) {
 
     val conf = new SparkConf().setAppName("stream_example")
-	.set("spark.cassandra.connection.host", "ec2-52-40-72-148.us-west-2.compute.amazonaws.com")
+	.set("spark.cassandra.connection.host", "ec2-52-36-254-68.us-west-2.compute.amazonaws.com")
     val ssc = new StreamingContext(conf, Seconds(5))
        
-    val zkQuorum = "52.40.101.137:2181,52.33.215.84:2181,52.40.120.50:2181"
-    val groupID = "rt"
-    val topics = Map("messages" -> 100)
+    val brokers = "52.36.254.68:9092,52.25.10.25:9092,52.35.40.35:9092,52.39.200.249:9092"
 
-    val messages = KafkaUtils.createStream(ssc, zkQuorum, groupID, topics).map(_._2)
+    val topicsSet = "messages".split(",").toSet
+    val kafkaParams = Map[String, String]("metadata.broker.list" -> brokers)
+    val messages = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicsSet).map(_._2)
 
     messages.foreachRDD { rdd =>
 	val sqlContext = SQLContextSingleton.getInstance(rdd.sparkContext)
@@ -34,11 +34,12 @@ object StreamExample {
 
         val df = sqlContext.jsonRDD(rdd)
 	df.registerTempTable("msgs")
-	
-        sqlContext.sql("SELECT state, county, CAST(COUNT(message) as INT) as count FROM msgs GROUP BY state, county")
-            .map{ case Row(state: String, county: String, count: Int) => MessageByCounty(state, county, count) }
-            .saveToCassandra("puppy","by_county_rt")
 
+        if (!df.rdd.isEmpty) {
+            sqlContext.sql("SELECT state, county, CAST(COUNT(message) as INT) as count FROM msgs GROUP BY state, county")
+		      .map{ case Row(state: String, county: String, count: Int) => MessageByCounty(state, county, count) }
+		      .saveToCassandra("puppy","by_county_rt")
+	}
     }
 
     ssc.start()

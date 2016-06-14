@@ -28,10 +28,10 @@ class Producer(object):
     """
     def __init__(self, addr):
         """Initialize Producer with address of the kafka broker ip address."""
-        self.producer = KafkaProducer(bootstrap_servers=addr, value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+        self.producer = KafkaProducer(bootstrap_servers=["52.36.254.68:9092","52.25.10.25:9092","52.35.40.35:9092","52.39.200.249:9092"], value_serializer=lambda v: json.dumps(v).encode('utf-8'))
         self.county_state_list = IngUt.parse_county_list('ingestion/county_list.txt')
 
-    def sim_msg_stream(self, sleep_time=0.25):
+    def sim_msg_stream(self):
         """Sends a stream of messages to the Kafka topic "messages".
 
         Args:
@@ -44,7 +44,6 @@ class Producer(object):
         msg_cnt = 0
 
         while True:
-            print len(self.county_state_list)
             county, state = IngUt.select_random_county(self.county_state_list)
 
             timestamp = list(time.localtime()[0:6])
@@ -58,10 +57,8 @@ class Producer(object):
 
 
             self.producer.send('messages', message_info)
-            print timestamp
-
-            if sleep_time != 0:
-                time.sleep(sleep_time)
+            if msg_cnt % 10000 == 0:
+                print timestamp
 
             msg_cnt += 1
 
@@ -79,4 +76,4 @@ if __name__ == "__main__":
     else:
         sleep_time = float(args[1])
 
-    prod.sim_msg_stream(sleep_time)
+    prod.sim_msg_stream()
