@@ -26,7 +26,7 @@ class Producer(object):
         county_state_list: a list of lists containing the counties and their
             associated state abbreviation
     """
-    def __init__(self, addr):
+    def __init__(self):
         """Initialize Producer with address of the kafka broker ip address."""
         self.producer = KafkaProducer(bootstrap_servers=["52.36.254.68:9092","52.25.10.25:9092","52.35.40.35:9092","52.39.200.249:9092"], value_serializer=lambda v: json.dumps(v).encode('utf-8'))
         self.county_state_list = IngUt.parse_county_list('ingestion/county_list.txt')
@@ -64,16 +64,5 @@ class Producer(object):
 
             
 if __name__ == "__main__":
-    kafka_url = "{}:9092".format(os.environ["KAFKA_BROKER_URL"]) 
-    print(kafka_url)
-    prod = Producer(kafka_url)
-    args = sys.argv
-    print args[1]
-    if len(args) == 1:
-        sleep_time = 0.0
-    elif args[1] == "+":
-        sleep_time = 0.0
-    else:
-        sleep_time = float(args[1])
-
+    prod = Producer()
     prod.sim_msg_stream()
