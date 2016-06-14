@@ -28,7 +28,10 @@ class Producer(object):
     """
     def __init__(self):
         """Initialize Producer with address of the kafka broker ip address."""
-        self.producer = KafkaProducer(bootstrap_servers=["52.36.254.68:9092","52.25.10.25:9092","52.35.40.35:9092","52.39.200.249:9092"], value_serializer=lambda v: json.dumps(v).encode('utf-8'), acks=0, linger_ms=500)
+        self.producer = KafkaProducer(bootstrap_servers=["52.36.254.68:9092","52.25.10.25:9092","52.35.40.35:9092","52.39.200.249:9092"],
+				      value_serializer=lambda v: json.dumps(v).encode('utf-8'),
+				      acks=0,
+				      linger_ms=500)
         self.county_state_list = IngUt.parse_county_list('ingestion/county_list.txt')
 
     def sim_msg_stream(self):
@@ -53,7 +56,7 @@ class Producer(object):
 			    "timestamp": timestamp,
 			    "creatorID": random.randint(0, NUM_USERS-1),
 			    "sender_id": random.randint(0, NUM_USERS-1),
-			    "message": fake.text()}
+			    "message": fake.text(max_nb_chars=5)}
 
 
             self.producer.send('messages', message_info)
